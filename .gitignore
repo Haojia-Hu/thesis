@@ -1,0 +1,38 @@
+# Data directories
+data/raw/
+data/transformed/
+data/output/
+
+# Generated data and results
+*.csv
+*.xlsx
+
+# Figures and tables
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.eps
+
+# LaTeX auxiliary files
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+
+# R / Python artifacts
+.Rhistory
+.RData
+__pycache__/
+*.pyc
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
