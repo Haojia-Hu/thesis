@@ -63,11 +63,5 @@ is documented in `data/raw/ch01/gt/`.
 
 The scripts implement the following transformation pipeline:
 
-raw Google Trends
-↓
-combined category-level attention index
-↓
-detrended attention residual
-↓
-first-differenced residual
+raw Google Trends -> combined category-level attention index -> detrended attention residual -> first-differenced residual
 
