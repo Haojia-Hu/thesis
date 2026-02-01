@@ -1,13 +1,13 @@
 # =========================
 # Purpose:
-#   1) Build category-level attention indices from raw Google Trends exports.
+# Build category-level attention indices from raw Google Trends exports.
 #
-#   2) Input (not tracked):
-#   - data/raw/ch01/gt/*.csv
-#     Each file is a Google Trends export with monthly data.
+# Input (not tracked):
+# - data/raw/ch01/gt/*.csv
+#   Each file is a Google Trends export with monthly data.
 #
-#   3) Output (not tracked):
-#   - data/transformed/ch01/index/*_index.csv
+# Output (not tracked):
+# - data/transformed/ch01/index/*_index.csv
 #
 # Notes:
 # - Raw files are not modified.
