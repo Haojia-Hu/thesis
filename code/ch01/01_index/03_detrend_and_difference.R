@@ -1,19 +1,31 @@
+# ============================================================
+# Purpose:
+#   1) Read category-level attention indices for Chapter 1.
+#   2) Remove smooth time trends and seasonal components from
+#      each category-level attention index using a quadratic
+#      time trend and month fixed effects.
+#   3) Construct analysis-ready attention series by taking
+#      first differences of the residual indices.
+#
+# Input (not tracked):
+#   - Category-level attention indices
+#     (data/transformed/ch01/index/*_index.csv)
+#
+# Core Output (not tracked):
+#   - Detrended attention residual series
+#     (stored as *_residual.csv under data/transformed/ch01/index/)
+#   - First-differenced residual attention series
+#     (stored as *_diff.csv under data/transformed/ch01/index/)
+#
+# Notes:
+#   - Detailed file names and storage locations are documented
+#     in data/transformed/ch01/index/README.md.
+#
+# ============================================================
+
 library(tidyverse)
 library(lubridate)
 library(tseries)
-
-# ============================================================
-# Purpose:
-#   1) Read category-level attention indices from:
-#        data/transformed/ch01/index/*_index.csv
-#   2) For each category, remove quadratic time trend + month FE
-#      and save residual series (detrended_index)
-#   3) Compute first difference of residual series and save
-#   4) Run ADF tests (residual + differenced residual) and save
-#   5) Save figures to data/output/ch01/figures
-# ============================================================
-
-
 
 # ---- Paths ----
 index_dir <- file.path("data", "transformed", "ch01", "index")
