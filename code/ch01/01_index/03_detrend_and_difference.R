@@ -15,7 +15,7 @@ library(tseries)
 
 
 
-# ---- Paths (repo-relative) ----
+# ---- Paths ----
 index_dir <- file.path("data", "transformed", "ch01", "index")
 resid_dir <- file.path("data", "transformed", "ch01", "residual")
 diff_dir  <- file.path("data", "transformed", "ch01", "diff")
