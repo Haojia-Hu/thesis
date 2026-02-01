@@ -1,6 +1,3 @@
-library(tidyverse)
-library(lubridate)
-
 # =========================
 # Purpose:
 #   1) Plot category-level attention indices for Chapter 1.
@@ -12,6 +9,9 @@ library(lubridate)
 #   - data/output/ch01/figures/fig_index_overlay.png
 #   - data/output/ch01/figures/fig_index_facets.png
 # =========================
+
+library(tidyverse)
+library(lubridate)
 
 # ---- Paths ----
 index_dir <- file.path("data", "transformed", "ch01", "index")
