@@ -19,3 +19,6 @@ Raw Google Trends files are not tracked in this repository.
 
 To construct category-level attention indices, run:
 - code/ch01/01_index/01_build_attention_index.R
+
+Appendix:
+<img width="1039" height="953" alt="fig1" src="https://github.com/user-attachments/assets/7f35807e-48ce-4dce-8664-cb4970a47be3" />
