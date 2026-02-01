@@ -6,8 +6,14 @@ This project uses monthly Google Trends exports
 Files should be placed locally under:
 - data/raw/gt/
 
-Each CSV file corresponds to one consumption category
-(e.g., apparel.csv, food.csv, housing.csv).
+Each CSV file corresponds to a consumption category and contains
+monthly search intensity for multiple keywords, downloaded directly
+from Google Trends.
+
+Examples (not included):
+- apparel.csv
+- food.csv
+- housing.csv
 
 Raw Google Trends files are not tracked in this repository.
 
