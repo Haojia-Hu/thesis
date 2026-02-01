@@ -1,13 +1,13 @@
 # =========================
 # Purpose:
-#   1) Plot category-level attention indices for Chapter 1.
+# Plot category-level attention indices for Chapter 1.
 #
-#   2) Input (not tracked):
-#   - data/transformed/ch01/index/*_index.csv
+# Input (not tracked):
+# - data/transformed/ch01/index/*_index.csv
 #
-#   3) Output (not tracked):
-#   - data/output/ch01/figures/fig_index_overlay.png
-#   - data/output/ch01/figures/fig_index_facets.png
+# Output (not tracked):
+# - data/output/ch01/figures/fig_index_overlay.png
+# - data/output/ch01/figures/fig_index_facets.png
 # =========================
 
 library(tidyverse)
