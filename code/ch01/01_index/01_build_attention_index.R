@@ -1,6 +1,3 @@
-library(tidyverse)
-library(lubridate)
-
 # =========================
 # Purpose:
 #   1) Build category-level attention indices from raw Google Trends exports.
@@ -17,7 +14,10 @@ library(lubridate)
 # - Weights are defined below for each category.
 # =========================
 
-# ---- Repo-relative paths ----
+library(tidyverse)
+library(lubridate)
+
+# ---- Paths ----
 gt_dir    <- file.path("data", "raw", "gt")
 out_dir   <- file.path("data", "transformed", "index")
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
