@@ -6,11 +6,11 @@ library(lubridate)
 # Build category-level attention indices from raw Google Trends exports.
 #
 # Input (not tracked):
-# - data/raw/gt/*.csv
+# - data/raw/ch01/gt/*.csv
 #   Each file is a Google Trends export with monthly data.
 #
 # Output (not tracked):
-# - data/transformed/index/*_index.csv
+# - data/transformed/ch01/index/*_index.csv
 #
 # Notes:
 # - Raw files are not modified.
