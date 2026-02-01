@@ -3,14 +3,14 @@ library(lubridate)
 
 # =========================
 # Purpose:
-# Plot category-level attention indices for Chapter 1.
+#   1）Plot category-level attention indices for Chapter 1.
 #
-# Input (not tracked):
-# - data/transformed/ch01/index/*_index.csv
+#   2）Input (not tracked):
+#   - data/transformed/ch01/index/*_index.csv
 #
-# Output (not tracked):
-# - data/output/ch01/figures/fig_index_overlay.png
-# - data/output/ch01/figures/fig_index_facets.png
+#   3）Output (not tracked):
+#   - data/output/ch01/figures/fig_index_overlay.png
+#   - data/output/ch01/figures/fig_index_facets.png
 # =========================
 
 # ---- Paths ----
