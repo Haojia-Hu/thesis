@@ -1,3 +1,4 @@
+# Transformed Data: Attention Index
 
 This directory stores category-level attention indices constructed from raw
 Google Trends data for Chapter 1 of the dissertation.
