@@ -8,7 +8,7 @@ Files should be placed locally under:
 
 Each CSV file corresponds to a consumption category and contains
 monthly search intensity for multiple keywords, downloaded directly
-from Google Trends.
+from Google Trends (overall 11 main categories).
 
 Examples (not included):
 - apparel.csv
