@@ -5,50 +5,107 @@ dynamics and short-term predictability in category-level household attention
 for Chapter 1.
 
 All files in this directory are generated from first-differenced attention
-indices and are reproducible using the scripts in
+indices and are fully reproducible using the scripts in
 `code/ch01/02_attention_cycles/`.
+
+---
+
+## Overview
+
+The data products in this directory support three complementary empirical
+analyses of household attention dynamics:
+
+1. Time-domain evidence based on autoregressive (AR) models  
+2. Frequency-domain evidence based on Fast Fourier Transform (FFT)  
+3. Time-varying and heterogeneous cycle dynamics based on rolling FFT and
+   clustering
+
+Together, these outputs provide the empirical foundation for Sections 5.1–5.3
+of the paper.
 
 ---
 
 ## Contents
 
-### 1. AR-Based Cycle Detection
+### 1. AR-Based Cycle Detection (Time Domain)
 
-- **File**:
-  - `ar_cycle_summary.csv`
+**File:**
+- `ar_cycle_summary.csv`
 
-This file reports results from univariate AR models estimated on
-first-differenced attention indices. For each consumption category, it
-contains the AR lag order selected by the Bayesian Information Criterion (BIC),
-an indicator for the presence of cyclical dynamics, and the implied cycle
-period (in months) derived from AR characteristic roots.
+This file reports results from univariate autoregressive models estimated on
+first-differenced attention indices. For each consumption category, it includes:
 
-These results are used to construct Table 2 (AR-based evidence) in the paper.
+- the AR lag order selected by the Bayesian Information Criterion (BIC),
+- an indicator for the presence of cyclical dynamics (based on characteristic
+  roots),
+- the implied cycle period (in months),
+- and the modulus of the dominant complex root.
+
+These results provide time-domain evidence of cyclical attention dynamics and
+are used to construct the AR-based columns of Table 2.
 
 ---
 
-### 2. AR Forecasts
+### 2. AR Forecasts (Short-Term Predictability)
 
-- **Files**:
-  - `forecasts/*_ar_forecast.csv`
+**Files:**
+- `forecasts/*_ar_forecast.csv`
 
 These files contain 12-month-ahead forecasts generated from univariate AR
 models estimated on first-differenced attention indices. Forecasts are used
-to assess short-term predictability in household attention dynamics.
+to assess short-term predictability in household attention dynamics rather
+than to build a forecasting system.
 
-Each forecast file includes point forecasts and corresponding confidence
-intervals and is generated using AR lag orders selected by BIC.
+Each forecast file includes:
+- point forecasts,
+- and corresponding confidence intervals.
+
+AR lag orders used in forecasting are selected by BIC and are consistent with
+the AR-based cycle detection results.
 
 ---
 
-### 3. Frequency-Domain and Rolling FFT Results
+### 3. Frequency-Domain Cycle Evidence (FFT)
 
-- **Files**:
-  - `fft_cycle_summary.csv`
-  - `rolling_fft_summary.csv`
-  - `rolling_fft_cluster_results.csv`
+**File:**
+- `fft_cycle_summary.csv`
 
-These files summarize frequency-domain evidence on attention cycles,
-including dominant cycle periods, time variation in cycle length, and
-heterogeneity across consumption categories. They support the analysis of
-attention cycle stability and clustering.
+This file summarizes frequency-domain evidence on attention cycles obtained
+using the Fast Fourier Transform (FFT). For each category, it reports the
+dominant cycle period and the next two most prominent periodic components.
+
+These results provide complementary evidence to AR-based methods and are used
+to construct the FFT-based columns of Table 2.
+
+---
+
+### 4. Time-Varying Cycles and Heterogeneity (Rolling FFT)
+
+**Files:**
+- `rolling_fft_results.csv`
+- `rolling_fft_cluster_results.csv`
+
+The file `rolling_fft_results.csv` contains rolling-window FFT estimates of
+dominant cycle periods for each category, capturing how attention cycles evolve
+over time.
+
+The file `rolling_fft_cluster_results.csv` summarizes rolling FFT dynamics at
+the category level. It reports:
+- the average cycle length,
+- the volatility (standard deviation) of cycle length,
+- the time trend in cycle length,
+- and cluster assignments based on these features.
+
+These outputs support the analysis of heterogeneity in attention cycles across
+consumption categories and are used to construct Figure 4.
+
+---
+
+## Notes
+
+- All files in this directory are analysis-level transformed data and are not
+  tracked in the repository.
+- Figures generated from these data are stored separately under
+  `data/output/ch01/figures/`.
+- Detailed descriptions of estimation procedures are provided in the scripts
+  under `code/ch01/02_attention_cycles/`.
