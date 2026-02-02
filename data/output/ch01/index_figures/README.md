@@ -1,4 +1,4 @@
-# Chapter 1 Figures
+# Chapter 1_Index Figures
 
 This folder stores figures generated from Chapter 1 scripts.
 
