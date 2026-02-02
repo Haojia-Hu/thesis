@@ -1,0 +1,219 @@
+# ============================================================
+# Purpose:
+#   1) Provide frequency-domain evidence of attention cycles
+#      using FFT on first-differenced attention indices.
+#   2) Estimate time-varying dominant cycle periods using
+#      rolling-window FFT.
+#   3) Summarize heterogeneity in cycle dynamics across
+#      categories via clustering on rolling FFT features.
+#
+# Input (not tracked):
+#   - First-differenced attention indices:
+#     data/transformed/ch01/diff/*_diff.csv
+#
+# Core Output (not tracked):
+#   - FFT-based dominant cycle periods (Table 2 support):
+#     data/transformed/ch01/attention_cycles/fft_cycle_summary.csv
+#   - Rolling FFT dominant period series:
+#     data/transformed/ch01/attention_cycles/rolling_fft_results.csv
+#   - Rolling FFT feature summary + cluster assignments:
+#     data/transformed/ch01/attention_cycles/rolling_fft_cluster_results.csv
+#
+# Figures (not tracked):
+#   - Rolling FFT periods over time (facet):
+#     data/output/ch01/figures/ch01_rolling_fft_periods.png
+#   - Dendrogram:
+#     data/output/ch01/figures/ch01_rolling_fft_dendrogram.png
+#   - Mean period vs volatility scatter (Figure 4):
+#     data/output/ch01/figures/ch01_cycle_heterogeneity_scatter.png
+# ============================================================
+
+library(tidyverse)
+library(forecast)
+library(cluster)
+library(factoextra)
+library(lubridate)
+
+# ---- Paths ----
+diff_dir <- file.path("data", "transformed", "ch01", "diff")
+out_dir  <- file.path("data", "transformed", "ch01", "attention_cycles")
+fig_dir  <- file.path("data", "output", "ch01", "figures")
+
+dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
+
+# ---- Read diff data ----
+file_list <- list.files(diff_dir, pattern = "_diff\\.csv$", full.names = TRUE)
+stopifnot(length(file_list) > 0)
+
+data_diff_list <- lapply(file_list, read_csv, show_col_types = FALSE)
+names(data_diff_list) <- gsub("_diff\\.csv$", "", basename(file_list))
+
+# ============================================================
+# 1) FFT (frequency-domain evidence)
+# ============================================================
+fft_periods_top3 <- function(x) {
+  x <- na.omit(x)
+  N <- length(x)
+  if (N < 12) return(c(NA_real_, NA_real_, NA_real_))
+
+  fft_result <- fft(x)
+  power_spectrum <- Mod(fft_result)^2
+  freq <- (0:(N - 1)) / N
+
+  # use positive frequencies excluding 0
+  valid_freqs <- freq[2:(N/2)]
+  valid_powers <- power_spectrum[2:(N/2)]
+
+  top_idx <- order(valid_powers, decreasing = TRUE)[1:3]
+  top_freqs <- valid_freqs[top_idx]
+  top_periods <- 1 / top_freqs
+
+  as.numeric(top_periods)
+}
+
+fft_cycle_summary <- map_df(names(data_diff_list), function(cat) {
+  df <- data_diff_list[[cat]] %>%
+    mutate(Date = as.Date(Date)) %>%
+    arrange(Date)
+
+  periods <- fft_periods_top3(df$diff_index)
+
+  tibble(
+    category = cat,
+    main_period = periods[1],
+    second_period = periods[2],
+    third_period = periods[3]
+  )
+})
+
+write_csv(fft_cycle_summary, file.path(out_dir, "fft_cycle_summary.csv"))
+
+# ============================================================
+# 2) Rolling FFT (time-varying dominant cycle)
+# ============================================================
+window_size <- 60
+step_size <- 6
+
+rolling_fft_results <- map_df(names(data_diff_list), function(cat) {
+  df <- data_diff_list[[cat]] %>%
+    mutate(Date = as.Date(Date)) %>%
+    arrange(Date)
+
+  x <- na.omit(df$diff_index)
+  if (length(x) < window_size) return(NULL)
+
+  periods <- c()
+  time_stamps <- c()
+
+  for (i in seq(1, length(x) - window_size, by = step_size)) {
+    sub_series <- x[i:(i + window_size - 1)]
+    fft_result <- fft(sub_series)
+    power_spectrum <- Mod(fft_result)^2
+    freq <- (0:(window_size - 1)) / window_size
+
+    valid_freqs <- freq[2:(window_size/2)]
+    valid_powers <- power_spectrum[2:(window_size/2)]
+
+    main_freq <- valid_freqs[which.max(valid_powers)]
+    main_period <- 1 / main_freq
+
+    periods <- c(periods, main_period)
+    time_stamps <- c(time_stamps, df$Date[i + window_size - 1])
+  }
+
+  tibble(category = cat, date = as.Date(time_stamps), rolling_period = periods)
+})
+
+write_csv(rolling_fft_results, file.path(out_dir, "rolling_fft_results.csv"))
+
+# Rolling FFT figure (facet)
+p_roll <- ggplot(rolling_fft_results, aes(x = date, y = rolling_period)) +
+  geom_line() +
+  facet_wrap(~ category, scales = "free_y") +
+  labs(
+    title = "Rolling FFT: Dominant Cycle Periods Over Time",
+    x = "Date",
+    y = "Dominant Period (Months)"
+  ) +
+  theme_minimal(base_size = 13)
+
+ggsave(
+  filename = file.path(fig_dir, "ch01_rolling_fft_periods.png"),
+  plot = p_roll,
+  width = 12,
+  height = 8
+)
+
+# ============================================================
+# 3) Clustering on rolling FFT features
+# ============================================================
+rolling_features <- rolling_fft_results %>%
+  group_by(category) %>%
+  summarize(
+    mean_period = mean(rolling_period, na.rm = TRUE),
+    sd_period = sd(rolling_period, na.rm = TRUE),
+    trend = lm(rolling_period ~ as.numeric(date), data = .)$coefficients[2],
+    .groups = "drop"
+  ) %>%
+  drop_na()
+
+# distance + hierarchical clustering
+X <- rolling_features %>% select(mean_period, sd_period, trend)
+distance_matrix <- dist(scale(X), method = "euclidean")
+hc <- hclust(distance_matrix, method = "ward.D2")
+
+k <- 2
+cluster_groups <- cutree(hc, k = k)
+
+rolling_features <- rolling_features %>%
+  mutate(
+    cluster = as.factor(cluster_groups),
+    period_type = case_when(
+      cluster == "1" ~ "Short-term",
+      cluster == "2" ~ "Long-term",
+      TRUE ~ "Other"
+    )
+  )
+
+write_csv(rolling_features, file.path(out_dir, "rolling_fft_cluster_results.csv"))
+
+# Dendrogram figure
+p_dend <- fviz_dend(
+  hc,
+  k = k,
+  rect = TRUE,
+  rect_fill = TRUE,
+  cex = 0.8,
+  main = "Cluster Dendrogram (Rolling FFT Features)"
+)
+
+ggsave(
+  filename = file.path(fig_dir, "ch01_rolling_fft_dendrogram.png"),
+  plot = p_dend,
+  width = 10,
+  height = 6
+)
+
+# Scatter figure (Figure 4 style)
+p_scatter <- ggplot(
+  rolling_features,
+  aes(x = mean_period, y = sd_period, color = cluster, label = category)
+) +
+  geom_point(size = 3) +
+  geom_text(vjust = -0.7, size = 3) +
+  labs(
+    title = "Cycle Heterogeneity: Mean Period vs Volatility (Rolling FFT)",
+    x = "Mean Period (Months)",
+    y = "Volatility (SD)"
+  ) +
+  theme_minimal(base_size = 13)
+
+ggsave(
+  filename = file.path(fig_dir, "ch01_cycle_heterogeneity_scatter.png"),
+  plot = p_scatter,
+  width = 10,
+  height = 6
+)
+
+message("FFT + rolling FFT + clustering completed.")
