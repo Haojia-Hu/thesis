@@ -1,4 +1,4 @@
-# Chapter 1 — About Attention Index Construction and Transformation
+# Chapter 1 — Attention Index Construction and Transformation
 
 This directory contains all scripts used to construct and transform
 category-level consumer attention indices for Chapter 1.
