@@ -1,5 +1,4 @@
 # ==========================================================
-#
 # Purpose:
 #   Ingest raw Factiva news-count exports (annual frequency) and convert them into a monthly series for Chapter 1 analyses.
 #
@@ -9,7 +8,7 @@
 #     - Year extracted from the trailing 4 digits in DateRange
 #
 # Outputs:
-#   data/derived/news/factiva_monthly/*_factiva_monthly.csv
+#   data/transformed/ch01/controls/*_factiva_monthly.csv
 #
 # Notes:
 #   Factiva exports are not tracked in git. See data/raw/README.md
@@ -21,8 +20,8 @@ library(lubridate)
 library(readr)
 
 # ===== Paths =====
-input_folder  <- "data/raw"
-output_folder <- "data/derived/news/factiva_monthly"
+input_folder  <- "data/raw/ch01/news_volume"
+output_folder <- "data/transformed/ch01/controls"
 
 dir.create(output_folder, recursive = TRUE, showWarnings = FALSE)
 
