@@ -1,4 +1,4 @@
-## Raw Data: Factiva News Volume
+# Raw Data: Factiva News Volume
 This section documents the **raw Factiva exports** used to construct monthly news-volume measures for Chapter 1 analyses (including robustness checks that control for news volume).
 
 ### Data source
