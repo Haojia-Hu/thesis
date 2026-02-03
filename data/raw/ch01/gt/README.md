@@ -1,4 +1,4 @@
-## Google Trends data
+# Google Trends data
 
 This project uses monthly Google Trends exports
 (https://trends.google.com/trends/).
