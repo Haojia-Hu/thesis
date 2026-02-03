@@ -54,6 +54,37 @@ Files include:
 
 ---
 
+### 2. Macro controls removed (aggregate CPI kept)
+
+**Purpose**
+
+This robustness check removes macroeconomic controls from the baseline LP
+regressions, while retaining **aggregate CPI** as a minimal common control.
+
+**Difference from baseline**
+
+- Keeps the baseline attention structure (lagged attention and interactions)
+- Drops macro controls: `D_EPU`, `D_ConsumerSent`, `D_Unemployment`, `D_RDI`, `D_Mortgage`
+- Retains only `D_CpiAgg`
+- Standard errors are clustered by `category` and `Date`
+
+**Code**
+
+code/ch01/03_expectation_formation/06_robustness_check/02_remove_macro_keep_cpiagg.R
+
+
+**Outputs**
+
+data/output/ch01/local_projection/robustness_check/remove_macro_keep_cpiagg/
+
+
+Files include:
+- `irf_remove_macro_keep_cpiagg.csv`
+- `coef_path_remove_macro_keep_cpiagg.csv`
+- `fig_irf_interactions_remove_macro_keep_cpiagg.png`
+
+---
+
 ## Notes
 
 - Each robustness check has its **own subfolder** containing regression outputs
