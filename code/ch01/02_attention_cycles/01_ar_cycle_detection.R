@@ -110,5 +110,3 @@ ar_final <- left_join(ar_bic_summary, ar_cycle_summary, by = "category")
 
 # ---- Save results ----
 write_csv(ar_final, file.path(out_dir, "ar_cycle_summary.csv"))
-
-message("AR-based cycle detection completed.")
