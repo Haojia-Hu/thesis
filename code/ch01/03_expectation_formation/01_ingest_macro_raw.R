@@ -1,7 +1,6 @@
-############################################################
+# ============================================================
 # Purpose:
-#   Ingest and clean raw macroeconomic series used as controls
-#   in Chapter 1 analyses (including Local Projections).
+#   Ingest and clean raw macroeconomic series used as controls in Chapter 1 analyses (including Local Projections).
 #
 #   - Reads raw macro CSV files downloaded from FRED
 #   - Standardizes variable names and date formats
@@ -17,7 +16,7 @@
 # Notes:
 #   Raw macro data are not included in the repository.
 #   See data/raw/README.md for required series and sources.
-############################################################
+# ============================================================
 
 # ===== Packages =====
 library(tidyverse)
