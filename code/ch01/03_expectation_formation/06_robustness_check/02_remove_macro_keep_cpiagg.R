@@ -1,6 +1,6 @@
 # ==========================================================
 # Robustness Check 02
-# Script: 02_remove_macro_keep_cpiagg.R
+# Robustness: Remove macro variables
 #
 # Purpose:
 #   Local Projections with macro controls removed, keeping only D_CpiAgg.
