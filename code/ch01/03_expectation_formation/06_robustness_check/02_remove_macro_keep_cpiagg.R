@@ -1,5 +1,5 @@
 # ==========================================================
-# Robustness Check 02
+# Local Projection — Robustness Check 02
 # Robustness: Remove macro variables
 #
 # Purpose:
