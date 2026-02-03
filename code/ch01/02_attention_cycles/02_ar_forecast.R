@@ -146,7 +146,4 @@ if (length(plot_list) > 0) {
   for (p in plot_list) print(p)
   dev.off()
 
-  message("Forecast completed and outputs saved.")
-} else {
-  message("No valid forecast results to save.")
-}
+
