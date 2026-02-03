@@ -1,4 +1,4 @@
-## Raw Data: Category-level CPI (Chapter 1)
+# Category-level CPI
 
 This section documents **raw CPI index data by consumption category** used in Chapter 1 to construct category-level price changes and price volatility.
 
@@ -45,7 +45,7 @@ in the filename.
 
 Raw CPI Excel files are processed by:
 
-code/ch01/01_index/01_ingest_category_cpi.R
+code/ch01/03_expectation_formation/03_ingest_category_cpi.R
 
 
 The script converts the raw Excel tables into **monthly, category-level CPI series**
