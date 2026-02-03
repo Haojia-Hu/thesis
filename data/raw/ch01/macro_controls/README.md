@@ -1,4 +1,4 @@
-# Macroeconomic Controls
+# Raw Data: Macroeconomic Controls
 
 This directory documents the **raw macroeconomic data inputs** used to construct macro controls for Chapter 1 analyses, including the Local Projection framework for inflation expectations.
 
