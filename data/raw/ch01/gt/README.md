@@ -1,4 +1,4 @@
-# Raw Data: Google Trends (Chapter 1)
+# Raw Data: Google Trends
 
 This project uses **monthly Google Trends exports**:
 https://trends.google.com/trends/
