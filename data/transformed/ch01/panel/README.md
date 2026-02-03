@@ -6,7 +6,7 @@ Chapter 1 regressions (Local Projections, fixed-effects regressions, and robustn
 ## File (Baseline)
 
 - `panel_data.csv`  
-  Monthly category-by-date panel covering **2004-01 to 2024-12** (inclusive).
+  Monthly category-by-date panel covering **2004-02 to 2024-12** (inclusive).
 
 ### Construction script
 
