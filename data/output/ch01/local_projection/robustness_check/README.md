@@ -85,6 +85,36 @@ Files include:
 
 ---
 
+### 3. Time fixed effects added
+
+**Purpose**
+
+This robustness check adds **time fixed effects** to the baseline LP regressions
+to absorb shocks common across categories in a given month.
+
+**Difference from baseline**
+
+- Baseline fixed effects: `| category`
+- Robustness fixed effects: `| category + Date`
+- Regressor set remains the same (lagged attention, interactions, and macro controls).
+
+**Code**
+
+code/ch01/03_expectation_formation/06_robustness_check/03_add_time_fixed_effects.R
+
+
+**Outputs**
+
+data/output/ch01/local_projection/robustness_check/time_fixed_effects/
+
+
+Files include:
+- `irf_time_fixed_effects.csv`
+- `coef_path_time_fixed_effects.csv`
+- `fig_irf_interactions_time_fixed_effects.png`
+
+---
+
 ## Notes
 
 - Each robustness check has its **own subfolder** containing regression outputs
