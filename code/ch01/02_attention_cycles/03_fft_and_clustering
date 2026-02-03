@@ -215,5 +215,3 @@ ggsave(
   width = 10,
   height = 6
 )
-
-message("FFT + rolling FFT + clustering completed.")
