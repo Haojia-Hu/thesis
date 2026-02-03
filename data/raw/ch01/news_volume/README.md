@@ -40,7 +40,7 @@ The script extracts:
 - `Year` from the trailing 4 digits of the date-range label
 - `DocumentCount` as numeric
 
-### Processing logic (annual → monthly)
+### Processing logic (annual → monthly): the time-period is from 2004-01 to 2024-12
 
 The raw Factiva output is annual. The ingestion script converts it to monthly frequency by:
 
