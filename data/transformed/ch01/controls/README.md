@@ -1,4 +1,4 @@
-# Transformed Controls — Chapter 1
+# Transformed Controls
 
 This folder contains **analysis-ready control variables** used in Chapter 1 regressions
 (including Local Projections). These datasets are produced **before** constructing the final
