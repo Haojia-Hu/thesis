@@ -115,6 +115,36 @@ Files include:
 
 ---
 
+### 4. With news controls
+
+**Purpose**
+
+This robustness check adds a news-volume control to the baseline LP regressions
+to test whether the estimated attention–price-signal effects are driven by
+changes in information flow.
+
+**Difference from baseline**
+
+- Adds `Diff_News` to the RHS controls
+- Fixed effects and core regressors remain the same as baseline.
+
+**Code**
+
+code/ch01/03_expectation_formation/06_robustness_check/04_add_news_controls.R
+
+
+**Outputs**
+
+data/output/ch01/local_projection/robustness_check/with_news_controls/
+
+
+Files include:
+- `irf_with_news_controls.csv`
+- `coef_path_with_news_controls.csv`
+- `fig_irf_interactions_with_news_controls.png`
+
+---
+
 ## Notes
 
 - Each robustness check has its **own subfolder** containing regression outputs
