@@ -74,5 +74,4 @@ for (file_path in file_list) {
   monthly_data <- process_factiva_file(file_path)
   write_csv(monthly_data, out_path)
 
-  message("Saved: ", out_path)
 }
