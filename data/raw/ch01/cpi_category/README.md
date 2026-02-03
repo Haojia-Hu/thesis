@@ -1,4 +1,4 @@
-# Category-level CPI
+# Raw Data: Category-level CPI
 
 This section documents **raw CPI index data by consumption category** used in Chapter 1 to construct category-level price changes and price volatility.
 
