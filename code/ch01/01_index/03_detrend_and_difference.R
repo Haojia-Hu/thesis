@@ -176,10 +176,3 @@ adf_diff <- index_diff %>%
 
 print(adf_diff)
 write_csv(adf_diff, adf_diff_out_path)
-
-message("Done. Outputs written to:",
-        "\n- ", resid_dir,
-        "\n- ", diff_dir,
-        "\n- ", fig_dir,
-        "\n- ", adf_out_path,
-        "\n- ", adf_diff_out_path)
