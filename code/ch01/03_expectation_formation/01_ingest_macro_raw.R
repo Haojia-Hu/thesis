@@ -11,7 +11,7 @@
 #   data/raw/ (CSV files named by FRED series ID)
 #
 # Outputs:
-#   data/derived/macro/*.csv
+#   data/transformed/ch01/controls/*.csv
 #
 # Notes:
 #   Raw macro data are not included in the repository.
@@ -23,8 +23,8 @@ library(tidyverse)
 library(lubridate)
 
 # ===== Paths (modify if needed) =====
-input_folder  <- "data/raw"
-output_folder <- "data/derived/macro"
+input_folder  <- "data/raw/ch01/macro_controls"
+output_folder <- "data/transformed/ch01/controls/"
 
 dir.create(output_folder, recursive = TRUE, showWarnings = FALSE)
 
