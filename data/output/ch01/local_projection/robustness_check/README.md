@@ -212,6 +212,38 @@ Files include:
 
 ---
 
+### 7. Placebo test: randomized attention
+
+**Purpose**
+
+This placebo test randomizes lagged attention within each category and re-runs
+the baseline LP specification. If the main results reflect a true dynamic
+attention–price-signal mechanism, the interaction effects should vanish or
+shrink substantially under randomized attention.
+
+**Difference from baseline**
+
+- Replace lagged attention (`L1_diff_index`) with a randomized version
+  (`Placebo_Lag_Att`) constructed by shuffling lagged attention within category.
+- Recompute interaction terms using `Placebo_Lag_Att`.
+
+**Code**
+
+code/ch01/03_expectation_formation/06_robustness_check/07_placebo_randomized_attention.R
+
+
+**Outputs**
+
+data/output/ch01/local_projection/robustness_check/placebo_randomized_attention/
+
+
+Files include:
+- `irf_placebo_randomized_attention.csv`
+- `coef_path_placebo_randomized_attention.csv`
+- `fig_irf_placebo_randomized_attention.png`
+
+---
+
 ## Notes
 
 - Each robustness check has its **own subfolder** containing regression outputs
