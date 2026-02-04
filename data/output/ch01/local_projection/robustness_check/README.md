@@ -206,9 +206,9 @@ data/output/ch01/local_projection/robustness_check/exclude_selected_categories/
 
 
 Files include:
-- 'irf_after_cleaning.csv'
-- 'coef_path_after_cleaning.csv'
-- 'fig_irf_interactions_after_cleaning.png'
+- `irf_after_cleaning.csv`
+- `coef_path_after_cleaning.csv`
+- `fig_irf_interactions_after_cleaning.png`
 
 ---
 
