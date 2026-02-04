@@ -177,6 +177,39 @@ Files include:
 
 ---
 
+### 6. Exclude selected categories (After Cleaning)
+
+**Purpose**
+
+This robustness check tests whether the baseline LP results are driven by a few
+specific categories by excluding selected categories from the sample.
+
+**Difference from baseline**
+
+- Baseline uses all 11 categories.
+- This robustness excludes: transportation, energy, communication.
+- LP specification is otherwise identical to the baseline.
+
+**Code**
+
+code/ch01/03_expectation_formation/04_build_panel_data_filtered.R
+code/ch01/03_expectation_formation/06_robustness_check/06_exclude_selected_categories.R
+
+
+**Inputs**
+
+- `data/transformed/ch01/panel/panel_data_filtered_excl_transport_energy_comm.csv`
+
+**Outputs**
+
+data/output/ch01/local_projection/robustness_check/exclude_selected_categories/
+
+
+Files include:
+- `irf_exclude_selected_categories.csv`
+- `coef_path_exclude_selected_categories.csv`
+- `fig_irf_interactions_exclude_selected_categories.png`
+
 ## Notes
 
 - Each robustness check has its **own subfolder** containing regression outputs
