@@ -99,6 +99,15 @@ the category level. It reports:
 These outputs support the analysis of heterogeneity in attention cycles across
 consumption categories and are used to construct Figure 4.
 
+### 5. Rolling FFT clustering results
+
+- Based on `rolling_fft_cluster_results.csv`
+
+Category-level cluster assignments derived from rolling FFT features of the differenced attention series. This file is used to define heterogeneity groups in the **local projection** analysis.
+
+Used by:
+- `code/ch01/03_expectation_formation/08_heterogeneity/08_lp_hetero_by_fft_cluster.R`
+
 ---
 
 ## Notes
