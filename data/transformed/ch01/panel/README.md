@@ -3,7 +3,7 @@
 This folder contains the **analysis panel dataset** used as the main input for
 Chapter 1 regressions (Local Projections, fixed-effects regressions, and robustness checks).
 
-## 1. Baseline File
+## 1. Baseline Panel
 
 - `panel_data.csv`  
   Monthly category-by-date panel covering **2004-02 to 2024-12** (inclusive).
