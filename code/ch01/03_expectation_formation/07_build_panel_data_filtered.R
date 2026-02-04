@@ -1,4 +1,91 @@
 # ==========================================================
+# Diagnostics: Granger causality (category-level VAR)
+#
+# Purpose:
+#   For each category, test whether Diff_PriceChange Granger-causes D_InflationExp using a bivariate VAR with lag length chosen by BIC (SC).
+#
+# Input:
+#   - data/transformed/ch01/panel/panel_data.csv
+#
+# Outputs:
+#   *- data/output/ch01/diagnostics/granger/granger_price_to_inflexp.csv
+# ==========================================================
+
+
+library(tidyverse)
+library(lubridate)
+library(vars)
+library(purrr)
+
+# ==========================
+# 0) Paths
+# ==========================
+in_file <- "data/transformed/ch01/panel/panel_data.csv"
+
+out_dir <- "data/output/ch01/diagnostics/granger"
+dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+
+out_csv <- file.path(out_dir, "granger_price_to_inflexp.csv")
+
+# ==========================
+# 1) Load data
+# ==========================
+panel_df <- read_csv(in_file, show_col_types = FALSE) %>%
+  mutate(Date = ymd(Date))
+
+required_cols <- c("category", "Date", "Diff_PriceChange", "D_InflationExp")
+missing_cols <- setdiff(required_cols, names(panel_df))
+if (length(missing_cols) > 0) {
+  stop("Missing required columns: ", paste(missing_cols, collapse = ", "))
+}
+
+categories <- sort(unique(panel_df$category))
+
+# ==========================
+# 2) Granger test per category
+# ==========================
+granger_test_one <- function(cat_name) {
+
+  df_sub <- panel_df %>%
+    filter(category == cat_name) %>%
+    arrange(Date) %>%
+    select(Diff_PriceChange, D_InflationExp) %>%
+    drop_na()
+
+  # Need enough obs for VARselect/VAR
+  if (nrow(df_sub) < 24) {
+    return(tibble(
+      category = cat_name,
+      p_used = NA_integer_,
+      F_stat = NA_real_,
+      p_value = NA_real_,
+      note = "insufficient observations"
+    ))
+  }
+
+  p_opt <- as.integer(VARselect(df_sub, lag.max = 6, type = "const")$selection["SC(n)"])
+
+  model <- VAR(df_sub, p = p_opt, type = "const")
+  test  <- causality(model, cause = "Diff_PriceChange")$Granger
+
+  tibble(
+    category = cat_name,
+    p_used = p_opt,
+    F_stat = as.numeric(test$statistic),
+    p_value = as.numeric(test$p.value),
+    note = ""
+  )
+}
+
+granger_results <- map_dfr(categories, granger_test_one) %>%
+  arrange(p_value)
+
+write_csv(granger_results, out_csv)
+
+message("Done. Saved: ", out_csv)
+
+
+# ==========================================================
 # Build filtered panel data (exclude selected categories)
 #
 # Purpose:
@@ -13,7 +100,7 @@
 # Output:
 #   - data/transformed/ch01/panel/panel_data_filtered.csv
 #
-# Notes:
+# Notes (The results come from granger test):
 #   This script excludes:
 #     - transportation
 #     - energy
