@@ -1,1 +1,552 @@
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    \noindent {This paper studies how mortgage rate lock-in shapes short-run housing-market dynamics in the United States. We construct a monthly CBSA-level measure of the local mortgage rate gap using loan-level HMDA data and the national 30-year rate. To address endogeneity, I develop a Shift-Share-style instrument that interacts national refinancing shocks with the local distribution of mortgage vintages. The results show that a larger rate gap leads to sharp and immediate declines in new listings, inventory, and pending sales. These patterns indicate strong mobility frictions and a rapid deterioration in market liquidity. In contrast, the effect on house price growth is small and slow to appear. Local projection IV estimates reveal that prices decline modestly in the first few months and that the response varies across markets with different demand and supply conditions. The findings demonstrate that mortgage lock-in operates mainly through quantities rather than prices and that local fundamentals shape how the shock is absorbed. The paper provides new, fully replicable evidence on the timing and strength of lock-in during recent rate increases.}
+\end{abstract}
+
+\begin{keywords}
+    {Household Mobility Frictions, Mortgage Lock-In, Housing Market}
+\end{keywords}
+
+
+
+
+\section{Introduction}
+Mortgage rates rose sharply in 2022, increasing at one of the fastest paces in recent decades. At the same time, the number of national-level home sales fell, especially existing-home sales, and new listings dropped across most U.S. markets. Prices, however, remained surprisingly relatively stable. This combination of weak turnover and resilient prices led observers to ask a simple question: why did rising borrowing costs lead to a sharp slowdown in market activity without a large fall in home values?\\
+
+A large part of the answer lies in the structure of the U.S. mortgage market. Most borrowers hold long-term fixed-rate mortgages. When market rates rise, the gap between a borrower’s current rate and the new market rate becomes large. This rate gap makes moving and refinancing more costly. A household that wants to move must give up its low existing rate and accept a much higher new one. This creates a lock-in effect. The idea behind lock-in is intuitive, but its size and market-wide implications are still unclear. The events of 2022 provide a rare opportunity to quantify these effects.\\
+
+Understanding lock-in is important for several reasons. The housing market connects household mobility, local labor markets, and the transmission of monetary policy. If lock-in reduces seller entry, the supply of homes adjusts more slowly. This can dampen or delay price responses to interest-rate changes. Lock-in may also affect who moves and when they move. These frictions can shift the flow of transactions even when demand remains strong.  Existing work has documented important household-level lock-in effects and shown that fixed-rate mortgages can reduce mobility. However, there is still limited evidence on how these frictions shape market-level outcomes such as listings, inventory, and price dynamics during large rate increases.\\
+
+There are two main challenges. First, mortgage rates, refinancing, and local housing conditions all move together. This makes it difficult to isolate the direct effect of lock-in. Second, supply and demand react at the same time. When rates rise, demand falls, but supply may also fall if many borrowers hold below-market rates. Standard simple empirical approaches struggle to separate these forces.\\
+
+This paper addresses these challenges by constructing a measure of how strongly each market is exposed to mortgage lock-in and by using it to study how housing activity responds to movements in mortgage rates over recent years. The measure is simple and reflects the difference between a region’s outstanding mortgage rates and the current national rate., which we refer to this difference as the local mortgage rate gap. A larger gap means that more owners hold mortgages that are cheap relative to new loans. These owners face a stronger incentive to stay in place. The gap therefore provides a useful summary of how lock-in varies across markets and over time. In this study, to deal with endogeneity, we construct a Bartik-style instrument. The instrument combines the local distribution of mortgage vintages with national movements in refinancing conditions. This strategy isolates the part of the rate gap that comes from aggregate changes in refinancing incentives rather than from local housing activity. It gives a cleaner view of how lock-in affects market outcomes.\\
+
+The empirical results show that lock-in has strong effects on market liquidity. A higher local rate gap leads to a large decline in new listings and pending sales. These outcomes capture a household’s decision to enter the market. When the rate gap increases by one percentage point, new listings fall sharply and turnover slows. The size of the effect is economically meaningful and appears quickly. These findings suggest that mobility frictions are powerful in a rising-rate environment. The study also use a simple difference-in-differences comparison to check this pattern. Markets with lower outstanding mortgage rates in 2021 were more exposed once rates increased. These markets show a sharper decline in new listings after March 2022. The DID estimates line up well with the IV results. The match between the two approaches suggests that the rate gap captures real lock-in frictions rather than local noise.\\
+
+The price response is much weaker. Prices adjust slowly after the rate shock, and the short-run effects remain small. Higher borrowing costs reduce demand, yet the fall in supply pushes in the opposite direction. Many owners hold mortgages with rates far below market levels and prefer to stay. This keeps the flow of listings low and provides a degree of support to prices. As a result, liquidity reacts immediately, while price growth changes only gradually. The dynamic IV results make this pattern clear. Listings fall immediately, while prices shift only slightly in the first few months. This gap between quantity responses and price responses matches the view that short-run housing supply is inelastic and that market pressure takes time to build. This mix of forces helps explain why the sharp rise in rates during 2022 produced a big drop in turnover but only a modest change in prices.\\
+
+This paper adds to a large body of work on mortgage lock-in and housing-market adjustment. Many studies examine mobility and refinancing decisions at the household level, and recent research has begun to show how these frictions appear in aggregate market outcomes. What remains limitation is measuring the short-run effects of lock-in across local markets and at a higher frequency dynamic. The approach in this paper helps fill this gap by combining public HMDA data with a simple design that links interest rate changes to monthly shifts house lock-in proxies, and price growth.\\
+
+The remainder of the paper proceeds as follows. Section 2 reviews the existing research on mortgage refinancing frictions, household mobility, and local housing-market adjustment. Section 3 describes the data, including the historical mortgage rate series, the Zillow housing-market indicators, and the local controls used in the analysis.
+Section 4 details the construction of the mortgage rate gap and introduces the identification strategy based on the refinancing-exposure instrument. Section 5 presents the main empirical results for housing-market activity, along with a set of robustness checks.
+Section 6 turns to both the static approach, and dynamic response of house price growth using a local-projection IV approach.Section 7 examines heterogeneous price responses across local labor-market conditions and land-supply elasticity. Section 8 concludes.\\
+
+
+
+\section{Literature Review}
+A growing literature examines how households respond to movements in mortgage rates and how these decisions spill over into the broader economy. Many studies document strong reactions in refinancing and mobility. These micro choices influence labor markets, employment conditions, and local housing activity \citep{18_fonseca_mortgage_2024,26_liebersohn_household_2025}. They also shape the transmission of monetary policy through the mortgage credit channel \citep{13_greenwald_mortgage_2018}. The evidence shows that rate changes alter household behavior in ways that matter for both local and aggregate outcomes. This point is now well established.\\
+
+A key reason is the structure of U.S. housing finance. Most mortgages are long-term, fixed-rate contracts that cannot be assumed by a new buyer. Each loan is linked to a single borrower and a single property. Once market rates rise, the existing mortgage becomes valuable to the incumbent household. Several studies describe this contract as an illiquid asset that slows adjustment in high-rate periods \citep{20_FHFA_2024,25_mangum_how_2025}. Countries that allow assumption or portability see far weaker lock-in effects. The contrast is clear in the international evidence \citep{18_fonseca_mortgage_2024,20_FHFA_2024}.\\
+
+At the household level, rising mortgage rates reduce mobility. This is a central finding. Many authors use quasi-random variation in origination timing to measure the effect. A one percentage point rate gap lowers the probability of moving by about eighteen percent \citep{18_fonseca_mortgage_2024}. Other identification strategies generate similar magnitudes \citep{26_liebersohn_household_2025}. The pattern does not depend on a single method. Market-wide indicators reinforce the conclusion. The FHFA estimates that rate increases after 2022 reduced home sales by almost forty five percent, equal to about 1.7 million lost transactions \citep{20_FHFA_2024}. Survey and synthetic evidence points to mobility declines near sixteen percent \citep{25_mangum_how_2025}. Even in regional analyses, the message remains simple. Larger rate gaps imply fewer moves, which quickly translates into fewer new listings.\\
+
+Declining mobility affects local market liquidity. When households stay put, new listings fall quickly. Inventories tighten and the buyer to seller ratio rises. Several papers show how this contraction shapes price stickiness. Lock-in reduces turnover precisely in metros where supply was already tight \citep{26_liebersohn_household_2025}. Structural and empirical models reproduce the same mechanism. Limited mobility shifts the market toward sellers and generates larger price responses in constrained areas \citep{18_fonseca_mortgage_2024,20_FHFA_2024}. Search and matching models reach consistent conclusions. Frictions create thin markets in which prices adjust slowly \citep{16_aladangady_locked_2024}. Cross-country surveys summarize these dynamics and emphasize their importance for housing adjustment \citep{17_amromin_macro_2023}.\\
+
+Meanwhile, regional heterogeneity plays an important role. Markets with low supply elasticity or strict land-use constraints experience stronger persistence in both quantities and prices. Several studies link this to differences in underlying land availability \citep{18_fonseca_mortgage_2024,20_FHFA_2024}. Theoretical work on mortgage credit transmission highlights the same point. Elastic regions adjust more quickly, while constrained regions show slow responses and higher price inertia \citep{17_amromin_macro_2023}. The implication is that lock-in reinforces pre-existing differences across local markets. It amplifies regional disparities during tightening cycles.\\
+
+Mortgage lock-in also shapes aggregate price dynamics. Many studies show that it softens the decline in real house prices that would normally follow an interest rate increase. When analysts ignore lock-in, predicted real price drops in 2021 to 2023 range from twenty to thirty seven percent \citep{20_FHFA_2024}. When the observed distribution of mortgage rate gaps is taken into account, the expected decline is closer to four percent. Structural calibration yields similar results. Without lock-in, real prices would have fallen by roughly twenty five percent, but incorporating the actual rate-gap distribution reduces the decline to about four percent \citep{19_batzer_rising_2024}. These results underscore the path-dependent nature of price adjustment.\\
+
+The mechanism behind this muted price response is straightforward. Higher policy rates raise borrowing costs for new buyers but leave incumbents unaffected. This gap creates a form of insulation on the supply side and weakens the sensitivity of market prices to interest rate movements. Earlier studies describe this pattern as a source of inertia in the housing market \citep{17_amromin_macro_2023,18_fonseca_mortgage_2024}. The resulting adjustment becomes asymmetric. Prices move more when rates fall than when rates rise. Recent work documents this path dependence using multiple empirical approaches \citep{20_FHFA_2024,26_liebersohn_household_2025,27_casta_impact_2025}.\\
+
+Lock-in has broader economic implications. Several studies show that households with low-rate mortgages move less, even when they face higher wage opportunities elsewhere. This constraint slows regional labor reallocation \citep{18_fonseca_mortgage_2024}. Reduced mobility also limits right-sizing, and some evidence points to fewer transitions into self-employment \citep{20_FHFA_2024,26_liebersohn_household_2025}. These patterns resemble other lock-in phenomena such as capital gains taxation or rent controls, where long-term commitments reduce efficient adjustment \citep{17_amromin_macro_2023,18_fonseca_mortgage_2024}.\\
+
+Despite the progress in this literature, important gaps remain. Much of the existing evidence relies on proprietary datasets such as Equifax–McDash, CoreLogic, or CRISM. These sources contain rich household-level data but cannot be replicated publicly. As a result, we know less about how lock-in appears in transparent, market-wide data at the CBSA level. This limitation also makes it harder to validate market-level dynamics in recent periods. A second gap concerns the time dimension. Many studies document static or medium-run effects of lock-in. They often compare periods before and after a rate shock. However, the short-run monthly adjustment path is less understood. Event studies describe broad breaks, but they do not show how mobility and prices evolve in the months immediately after a change in rates. Short-run responses may matter for understanding market liquidity and for interpreting policy transmission.\\
+
+This paper addresses these gaps by constructing a monthly and fully replicable CBSA-level measure of the mortgage rate gap using HMDA microdata, which provides a clear view of the rates households actually hold. we combine this measure with a Bartik-style instrument that links national refinancing conditions to the local distribution of mortgage vintages, generating plausibly exogenous shifts in local exposure to rising rates. With this variation, we trace the short-run responses of listings, turnover, and house price growth to changes in the rate gap. The results reveal how liquidity adjusts quickly while prices move more slowly, offering new evidence on the timing and strength of lock-in during recent tightening cycles.\\
+
+
+\section{Data}
+\subsection{Historical Mortgage Rate and Rate Gap}
+We construct our measure of the mortgage rate gap using loan-level data from the Home Mortgage Disclosure Act. The HMDA dataset, published by the Consumer Financial Protection Bureau, records all mortgage applications and originations reported by U.S. financial institutions from 2018 to 2024. It contains information on loan terms, contract rates, borrower characteristics, and property attributes. These variables allow us to measure local mortgage pricing at the time of origination and to track broad changes across regions.\\
+
+Beginning in 2018, HMDA reports exact contract interest rates, loan amounts, and maturities. These fields are essential for building regional estimates of effective mortgage rates. Because each release contains millions of observations, we process the files year by year. We retain variables related to mortgage pricing, borrower capacity, and basic property features. We focus on originated, first-lien, non-commercial, non-open-end, and non-reverse mortgages. The sample is limited to conventional residential loans. After cleaning each annual file, we merge the datasets to form a single panel that spans the full 2018 to 2024 period. This unified dataset provides the basis for constructing our regional mortgage rate measures.\\
+
+To identify the market benchmark, we use the Freddie Mac Primary Mortgage Market Survey. The PMMS reports weekly average rates on newly originated thirty-year fixed-rate mortgages. We convert the weekly series to a monthly frequency to match the timing of the HMDA-based panel. This alignment allows the contract rate at origination to be compared with the prevailing market rate in the same month. Together, HMDA and PMMS allow us to measure the gap between an existing mortgage rate and current market conditions.\\
+
+Other datasets contain longer and more detailed loan histories micro-level data but have important limitations. Such as CoreLogic Deeds, ICE McDash, and Equifax CRISM offer detailed borrower-level information but are proprietary and cannot be replicated. Many also lack consistent geographic identifiers at the metropolitan level. Government datasets such as the HUD FHA portfolio or the loan-level releases from Fannie Mae and Freddie Mac cover only specific market segments. Using HMDA and PMMS avoids these constraints. The combination provides national coverage, transparent loan-level pricing, and consistent geographic detail. This is essential for studying spatial variation in mortgage lock-in and its effect on housing prices.\\
+
+\subsection{Local Housing Market Indicators}
+To measure how local housing markets respond to mortgage lock-in, we assemble a set of monthly indicators from Zillow. These series capture conditions on both the supply side and the demand side of each metropolitan market. They form a comprehensive picture of local housing activity.\\
+
+We use measures of inventory and new listings to describe available supply. Inventory tracks the total number of active listings. New listings record the flow of properties entering the market each month. These variables reflect mobility, selling incentives, and the overall availability of housing. The demand side is represented by pending listings, days-to-pending, and price-cut share. Pending listings count the number of homes that go under contract in a given month. Days-to-pending measures the median time from listing to contract and serves as an indicator of market liquidity. The price-cut share captures the fraction of listings that record a price reduction. One additional series describe pricing conditions. The Zillow Home Value Index provides a measure of the typical regional home value. We compute its monthly percentage change to obtain a measure of local housing prices.\\
+
+Zillow releases these indicators at a monthly frequency and for a wide set of regions. However, Zillow region IDs do not match the metropolitan areas used in the HMDA data. To address this issue, we construct a crosswalk linking each Zillow region identifier to a core-based statistical area code, which is the MSA-level geographic unit used in HMDA. The CBSA code serves as our geographic unit throughout the paper. This mapping allows us to merge housing-market indicators with mortgage data and macroeconomic controls within a consistent spatial framework. It ensures that each dataset shares the same regional definitions.\\
+
+
+\subsection{Local Controls and Heterogeneity Data}
+We include additional local controls to capture broader economic and demographic conditions. These variables help isolate the role of mortgage lock-in and account for factors that influence both refinancing behavior and housing outcomes. All controls are harmonized to a monthly frequency and aligned with CBSA codes used in the HMDA and Zillow data.\\
+
+Local labor-market conditions are captured through the unemployment rate from the Bureau of Labor Statistics. Demographic changes are measured using population data from the Census Bureau’s annual estimates. These figures report July population levels for each CBSA. We interpolate the annual values to create a monthly population series and then compute the migration rate as the monthly percentage change in population. This measure reflects population flows that may influence local housing demand. We also include the number of building permits from the Census Building Permits Survey. This series serves as an indicator of new housing supply and construction activity.\\
+
+Local employment structure is measured using data from the Quarterly Census of Employment and Wages. The QCEW reports employment by industry and region. It allows us to construct additional indicators of economic composition, which are used in robustness checks and in heterogeneity analyses. In addition, we link each CBSA to the land supply elasticity estimates from \cite{29_10.1162/qjec.2010.125.3.1253}. These elasticity values capture geographic constraints on housing supply. They help us study how the lock-in effect varies across regions with different degrees of supply rigidity.\\
+
+All control variables are aligned with the same CBSA framework used for the Zillow indicators. This common geographic base ensures consistent spatial and temporal coverage from 2018 to 2024. It also provides a coherent structure for examining heterogeneous housing-market responses in the empirical sections that follow.
+
+
+\section{Mortgage Rate Gap Formation}
+To capture the degree of mortgage lock-in, we construct a measure of the \textit{Rate Gap}. It is defined as the difference between the prevailing market mortgage rate and the average contractual rate on outstanding loans within each housing market $m$ at time $t$:
+
+\[
+\text{RateGap}_{m,t} = r^{\text{market}}_{t} - \bar{r}_{m,t},
+\]
+
+Here $r^{\text{market}}{t}$ is the national thirty-year fixed-rate mortgage from the Freddie Mac Primary Mortgage Market Survey (PMMS). The term $\bar{r}{m,t}$ is the outstanding-loan-weighted average contractual rate of all active mortgages in market $m$ at time $t$. A larger rate gap means that many households hold mortgages priced well below current market conditions. This indicates stronger refinancing disincentives. It signals a higher degree of lock-in.\\
+
+\subsection{Construction of the Outstanding Mortgage Rate}
+We construct the outstanding mortgage rate to measure households’ exposure to lock-in at a monthly frequency. The measure is defined at the metropolitan statistical area level. It reflects the average contractual mortgage rate of all loans that remain active in a given region and month, weighted by the amount of outstanding principal on each loan. The key idea is to approximate the stock of active mortgages in each MSA at each month $t$, and to weight each loan’s contractual interest rate by its estimated remaining balance. This converts annual HMDA originations into a monthly panel of effective mortgage rates.\\
+
+For each loan $i$ originated in year $y_i$, HMDA reports the initial principal $P_i$, the annual contractual rate $r_i^{\text{ann}}$, and the loan term $N_i$ in months. The monthly interest rate is $r_i = r_i^{\text{ann}} / (100 \times 12)$.\\ 
+
+Under a standard fixed-rate amortization schedule, the monthly payment is
+\[
+\text{PMT}_i = P_i \times \frac{r_i (1 + r_i)^{N_i}}{(1 + r_i)^{N_i} - 1}.
+\]
+
+After $k$ months, the remaining principal balance is
+\[
+B_i(k) = P_i \left[ \frac{(1 + r_i)^{N_i} - (1 + r_i)^k}{(1 + r_i)^{N_i} - 1} \right],
+\]
+The balance declines over time, falling from 
+$P_i$ at origination to zero at maturity.\\
+
+Because HMDA data identify originations only at the annual level, we do not observe the exact month in which each loan was issued. We therefore assume that loans in a given year are uniformly distributed across the twelve months. This assumption creates a smooth inflow of new mortgages and yields a continuous approximation of the active loan stock. For any evaluation month $t$, the \textit{age} of a loan that would have been originated in month $m \in \{1, \dots, 12\}$ of year $y_i$ is
+\[
+k_{i,m}(t) = \max \left\{ 0, \min \left[ N_i, 12 (t_{\text{year}} - y_i) + (t_{\text{month}} - m) \right] \right\}.
+\]
+Here, $B_i(k)$ denotes the remaining balance of loan $i$ after $k$ months under the amortization schedule. The term $k_{i,m}(t)$ represents the number of months that have elapsed between the assumed origin month $m$ of year $y_i$ and the evaluation month $t$. Taken together, $B_i\big(k_{i,m}(t)\big)$ yields the outstanding principal balance of loan $i$ at time $t$, conditional on a specific origination month.\\
+
+Averaging over the twelve possible origination months yields the expected remaining balance $\tilde{B}_i(t)$, which is then used as the weight when constructing the outstanding-weighted average mortgage rate for each metropolitan area and month. The expected outstanding principal of loan $i$ at month $t$, integrating over the unknown origination month, is then
+\[
+\tilde{B}_i(t) = \frac{1}{12} \sum_{m=1}^{12} B_i\big(k_{i,m}(t)\big) \times e^{-\lambda_m k_{i,m}(t)}.
+\]
+The term $e^{-\lambda_m k}$ introduces an exponential decay factor that mimics prepayment or refinancing behavior. We assume $\lambda_m = 0.005$, implying that the weight of a loan declines by roughly 0.5\% per month beyond its scheduled amortization.\\
+
+For each metropolitan statistical area $m$ and month $t$, we define the outstanding-weighted average mortgage rate as
+
+\[
+\bar{r}_{m,t} = 
+\frac{\displaystyle \sum_{i \in \mathcal{L}_m} r_i^{\text{ann}} \, \tilde{B}_i(t)}
+     {\displaystyle \sum_{i \in \mathcal{L}_m} \tilde{B}_i(t)},
+\]
+
+where $\mathcal{L}_m$ is the set of all loans originated in region $m$ up to month $t$ that remain active at time $t$ (i.e., $\tilde{B}_i(t) > 0$). The resulting measure captures the effective borrowing rate faced by incumbent homeowners in each region and month. It combines contractual rates with repayment progress and captures the structure of the outstanding mortgage stock. Table \ref{tab:summary_outstanding} summarizes key characteristics of the HMDA loans used to construct the outstanding-rate measure.\\
+
+\begin{table}[ht!]
+\centering
+\caption{Summary Statistics for MSA-Level Outstanding Mortgage Panel}
+\label{tab:summary_outstanding}
+\begin{threeparttable}
+%======================
+% Panel A
+{\raggedright \textbf{Panel A: Sample Coverage} \par}
+\vspace{0.3em}
+
+\begin{tabular}{l r}
+\toprule
+\textbf{Variable} & \textbf{Value} \\
+\midrule
+Number of CBSAs & 444 \\
+Number of MSA-month observations & 35,412 \\
+Sample start year & 2018 \\
+Sample end year & 2024 \\
+\bottomrule
+\end{tabular}
+
+\vspace{1.2em}
+%======================
+% Panel B
+
+{\raggedright \textbf{Panel B: MSA-Month Characteristics} \par}
+\vspace{0.3em}
+
+\begin{tabular}{l r r c}
+\toprule
+\textbf{Variable} & \textbf{Mean} & \textbf{Median} & \textbf{IQR (P25--P75)} \\
+\midrule
+Weighted mortgage rate (\%) 
+    & 4.06 & 3.86 & [3.76, 4.39] \\
+
+Total outstanding balance (billion USD)
+    & 8.99 & 2.08 & [0.80, 6.95] \\
+
+Number of active loans (thousand)
+    & 58.41 & 16.54 & [6.91, 48.45] \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.8em}
+%======================
+% Notes left-aligned
+{\raggedright
+\footnotesize
+Notes: This table summarizes the MSA-month panel used to construct the outstanding mortgage rate. 
+Total outstanding balances are measured in billions of dollars. The number of active loans is measured in thousands. Statistics are based on 35,412 MSA-month observations across 444 CBSAs from 2018 to 2024.
+\par}
+
+\end{threeparttable}
+\end{table}
+
+\subsection{Rate Gap Formation}
+To align the outstanding-weighted contractual rates with prevailing market conditions, we merge the regional mortgage-rate panel with the Freddie Mac Primary Mortgage Market Survey. The PMMS reports the average rate on newly originated thirty-year fixed-rate mortgages in the United States. Since the PMMS series is released weekly, we take the monthly average to match the frequency of the HMDA-based panel. This step ensures that both data sources share the same time scale.\\
+
+For each area $m$ and month $t$, we pair the corresponding PMMS rate $r^{\text{market}}_{t}$ with the local average contractual rate $\bar{r}_{m,t}$. The difference between these two values gives the monthly Rate Gap. This variable summarizes the distance between the stock of outstanding mortgages and current market conditions.\\
+
+The merged dataset forms a consistent MSA-by-month panel for the years 2018 to 2024. The stock of existing mortgages adjusts slowly, mainly through amortization and occasional refinancing. As market rates rise, the average outstanding rate becomes increasingly misaligned with new borrowing conditions. The Rate Gap widens. When rates fall and refinancing resumes, the gap narrows. These movements summarize how the mortgage stock responds to interest rate cycles. The Rate Gap therefore provides a clear, data-driven measure of lock-in across metropolitan areas. It is the main explanatory variable in the empirical analysis. Figure~\ref{fig:rategap} reports the national average Rate Gap over the sample period.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/Fig1.jpg}
+    \caption{National Monthly Average Rate Gap, 2018–2024}
+    \label{fig:rategap}
+\end{figure}
+
+
+\subsection{Identification Strategy}
+To estimate the causal effect of mortgage lock-in on local housing outcomes, we use a shift–share (Bartik-type) instrumental variable strategy. The idea is simple. We create a source of variation that moves local mortgage rate gaps for reasons that do not depend on local economic conditions. This approach follows the logic in \cite{28_10.1257/aer.20181047} and \cite{30_10.2308/JFR-2021-003}. It isolates movements in the lock-in measure that are plausibly exogenous. The instrument takes the form
+\[
+Z_{m,t} = \text{Exposure}_{m} \times \text{NatShock}_{t},
+\]
+where $m$ denotes a local housing market and $t$ indexes time. The structure combines a common national shock with a predetermined regional weight. The first term varies across space. The second varies across time. Their product generates the interaction needed for identification.\\
+
+The national component $\text{NatShock}_{t}$ comes from movements in the national mortgage market. We obtain it by regressing the PMMS thirty-year fixed-rate mortgage series on the ten-year Treasury yield,
+\[
+\text{PMMS}_{t} = \alpha + \beta \text{GS10}_{t} + u_{t},
+\qquad
+\text u_{t} = {NatShock}_{t} .
+\]
+The residual captures monthly changes in mortgage rates that are not explained by long-term interest rates. This series represents the aggregate shock that is common across all regions, which varies only over time.\\
+
+The exposure index $\text{Exposure}_{m}$ is constructed from HMDA data over 2018 to 2020. For each region, we sort originated mortgages into several interest-rate brackets and compute the share of loan volume in each bracket. Let $w_{m,b}$ denote the share of loans in region 
+$m$ that fall into bin $b$. These shares describe the structure of the local mortgage portfolio before the study period. Some areas have many low-rate loans. Others do not, which means variation is persistent.\\
+
+To summarize the distribution, we apply principal component analysis to the vector
+\[
+(w_{m,1}, w_{m,2}, \ldots, w_{m,5}).
+\]
+We use the first principal component as the exposure index and scale it so that higher values correspond to a greater concentration of low-rate mortgages. This provides a single, predetermined measure of how sensitive each region is to changes in national mortgage conditions.\\
+
+Combining the exposure index with the national shock yields the instrument. The national shock varies over time, and the exposure index is fixed across metropolitan areas before the study period. Their interaction produces region-specific movements in mortgage-rate conditions that are driven by national forces rather than by contemporaneous local housing activity, which means the source of identifying variation. The key assumption is that the historical exposure measure affects current housing outcomes only through its interaction with aggregate mortgage-rate movements. Under this assumption, the shift–share design provides plausibly exogenous variation in the local mortgage rate gap and separates national credit movements from local housing shocks.\\
+
+\section{Main empirical results for housing-market activity}
+\subsection{Mortgage Rate Gap and Lock-in Channel}
+We examine whether local mortgage rate gaps generate measurable lock-in behavior in housing markets. Our outcomes are Zillow-based monthly indicators: for-sale inventory, new listings, pending sales, days to pending, and price-cut shares. These variables track supply and market activity that should react when lock-in changes homeowners' incentives to sell.\\
+
+To estimate causal effects of the rate gap on housing-market activity, we use a two-stage least squares specification. The first stage relates the observed rate gap to a Bartik instrument:
+
+\[
+\text{RateGap}_{m,t}
+= \pi_0 + \pi_1 Z_{m,t} + \pi_2' X_{m,t}
++ \mu_m + \tau_t + u_{m,t}.
+\]
+
+This instrument combines national mortgage-rate shocks with a predetermined local exposure index. The second stage uses the fitted rate gap to explain each housing-market proxy:
+
+\[
+Y_{m,t}
+= \beta_0 + \beta_1 \widehat{\text{RateGap}}_{m,t}
++ \beta_2' X_{m,t}
++ \mu_m + \tau_t + \varepsilon_{m,t}.
+\]
+
+Here \(Y_{m,t}\) denotes one of the Zillow outcomes. \(X_{m,t}\) includes unemployment, migration, and building permits. \(\mu_m\) and \(\tau_t\) are CBSA and month fixed effects. All regressions include CBSA and month fixed effects. Standard errors are clustered at the CBSA level.\\
+
+Table \ref{tab:lockin_iv} reports the results. For-sale inventory, new listings, and pending sales all decline sharply when the rate gap increases. These three series provide the clearest evidence of lock-in because they reflect decisions to enter the market. A one percentage point rise in the local gap lowers inventory by more than eight thousand units. The same shock reduces both new listings and pending sales by roughly two thousand units. These magnitudes are consistent with lower mobility among borrowers holding below-market mortgage rates.\\
+
+Days to pending and the share of price cuts do not respond as strongly. Both variables reflect later stages of the selling process and depend on buyer demand as well as market tightness. The lock-in mechanism works mainly through homeowners’ decisions to list their properties, so its effect on listing flow is large. In contrast, DTP and price cuts capture adjustments that occur after a home is already on the market. These margins are influenced by several forces at once, which reduces the precision of the estimates.\\
+
+The z-score specification delivers the same pattern. Standardization places all outcomes on a comparable scale and confirms that the negative effects on inventory, new listings, and pending sales are not driven by differences in units. Days to pending and price-cut shares remain imprecisely estimated. These margins reflect later stages of the selling process and depend on buyer conditions as well as market tightness, so their responses to the rate gap are weaker.\\
+
+Overall, the estimates show that the lock-in mechanism operates strongly in the data. When the rate gap rises within a region, effective housing supply falls and market entry declines. Transaction activity also slows. First-stage diagnostics support the identification strategy. The instrument is strongly correlated with the endogenous rate gap, and Kleibergen Paap statistics exceed conventional thresholds. Wu Hausman tests reject exogeneity of the observed gap and confirm the need for instrumental variables. Taken together, the results provide clear evidence that mortgage lock-in restricts local housing-market turnover. They also establish the empirical basis for the dynamic and price responses examined in further part.\\
+
+
+\begin{table}
+\centering
+\caption{Effects of Rate Gap on Housing Market Lock-in Proxies (2SLS Estimates)}
+\label{tab:lockin_iv}
+\begin{tabular}{lcc}
+\toprule
+ & \textbf{(1) Raw (1pp)} & \textbf{(2) Z-score} \\
+\midrule
+For-sale inventory & -8093.09$^{***}$ & -0.73$^{***}$ \\
+ & (2505.88) & (0.23) \\
+New listings & -1826.46$^{***}$ & -0.47$^{***}$ \\
+ & (657.16) & (0.17) \\
+Pending sales & -2554.98$^{***}$ & -0.64$^{***}$ \\
+ & (822.64) & (0.21) \\
+Days to pending & 29.63 & 0.13 \\
+ & (39.82) & (0.18) \\
+Share of price cuts & 0.068 & 0.14 \\
+ & (0.111) & (0.24) \\
+\midrule
+Kleibergen--Paap $F$-stat. & 80--165 & 80--165 \\
+Observations & \multicolumn{2}{c}{24,900 (MSA-month)} \\
+CBSA Fixed Effects & \multicolumn{2}{c}{Yes} \\
+Month Fixed Effects & \multicolumn{2}{c}{Yes} \\
+\bottomrule
+\multicolumn{3}{p{13cm}}{\footnotesize
+Notes: CBSA and month fixed effects included. Standard errors clustered by CBSA.
+$^{***} p<0.01$, $^{**} p<0.05$, $^{*} p<0.10$.
+}
+\end{tabular}
+\end{table}
+
+To complement the IV analysis, we implement a difference-in-differences design that compares CBSAs with higher and lower ex-ante lock-in exposure. Each CBSA’s baseline exposure is measured by its outstanding-balance-weighted mortgage rate in 2021. We classify the bottom third of this distribution as high-lock-in areas. The post period begins in March 2022, when mortgage rates started to rise. For each housing-market outcome \( y_{it} \), we estimate
+\[
+    y_{it} = 
+    \beta \left( HighLockedIn_i \times Post_t \right)
+    + \gamma_i + \delta_t + \varepsilon_{it},
+\]
+where \( \gamma_i \) and \( \delta_t \) denote CBSA and month fixed effects, and 
+standard errors are clustered at the CBSA level. Flow and stock variables are estimated in logs. The price-cut share is estimated in levels.\\
+
+The results in Table \ref{tab:did_main} show a clear decline in new listings in high-lock-in markets after the 2022 rate shock. This decline is economically meaningful and consistent with stronger mobility frictions among homeowners who entered the period with lower mortgage rates. Other outcomes, such as inventory, pending sales, and price-cut behavior, display small and statistically imprecise differences between high- and low-lock-in markets. These patterns indicate that the main margin of adjustment in high-lock-in areas is seller entry rather than contemporaneous changes in transactions or price setting.\\
+
+Overall, the evidence from the difference-in-differences design is consistent with the IV results. Markets that entered 2022 with lower mortgage rates experienced larger declines in new listings once rates began to rise. Other outcomes show modest and imprecise differences. This suggests that the most immediate adjustment operates through the listing decision rather than through sales or pricing behavior. The alignment between the two approaches strengthens the interpretation that the rate gap influences housing-market activity primarily through the lock-in channel.\\
+
+\begin{table}[ht!]
+\centering
+\caption{Effect of the 2022 Rate Shock on Market Outcomes: High vs. Low Lock-In CBSAs}
+\label{tab:did_main}
+
+\begin{tabular}{lcc}
+\toprule
+ & \multicolumn{1}{c}{Log level} & \multicolumn{1}{c}{Level level} \\
+\midrule
+For-sale inventory      & -5.44        &            \\
+                        & (3.46)       &            \\
+New listings            & -4.60$^{***}$&            \\
+                        & (1.63)       &            \\
+Pending sales           & -0.81        &            \\
+                        & (7.42)       &            \\
+Days to pending         & -2.89        &            \\
+                        & (4.21)       &            \\
+Share of price cuts     &                & -0.345   \\
+                        &                & (0.433)  \\
+\midrule
+CBSA fixed effects      & Yes            & Yes        \\
+Month fixed effects     & Yes            & Yes        \\
+Clustered by CBSA       & Yes            & Yes        \\
+Observations            & varies         & varies     \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.3em}
+\begin{minipage}{0.9\textwidth}
+\footnotesize
+Notes: Each coefficient comes from a separate DID regression with CBSA and month fixed
+effects and standard errors clustered by CBSA. Log outcomes (column “Log spec.”) are
+interpreted as percentage changes; level outcomes (column “Level spec.”) as percentage-point
+changes. $^{***} p<0.01$, $^{**} p<0.05$, $^{*} p<0.10$.
+\end{minipage}
+\end{table}
+
+
+\subsection{Mortgage Rate Gaps and the Dynamics of House Market}
+Before turning to house prices, we examine the dynamics of seller entry. The static IV and difference-in-differences results show that new listings respond most strongly to the mortgage rate gap. This outcome is the clearest proxy for lock-in because it captures the decision to enter the market. It also adjusts quickly and provides an early signal of how homeowners react when the gap rises. For this reason, we focus on the dynamic response of new listings.\\
+
+We next study the dynamics of new listings using a local projection IV specification. For each horizon h=1,…,12, we regress future new listings on the instrumented rate gap at time $t$, holding CBSA and month fixed effects constant. The rate gap is instrumented with the Bartik measure used in the baseline IV regressions. Figure \ref{fig:lp_newlisting} plots the estimated impulse responses and 95 percent confidence bands.\\
+
+The response of new listings is large and negative on impact and becomes more pronounced over the first half year. A one percentage point increase in the rate gap reduces new listings by about 2,200 units after one month and by roughly 4,000 units after six months. The effect remains strongly negative and statistically significant through 10th month, although the magnitude begins to shrink. Starting around 9th month, the response moves back toward zero, and by 12th month the point estimate turns slightly positive.\\
+
+Taken together, the local projection results show that the lock-in effect on seller entry is both strong and persistent over the first year after a rate-gap shock. New listings fall sharply and stay depressed for several months before gradually recovering. This dynamic pattern is consistent with the static IV and difference-in-differences evidence that mortgage lock-in operates mainly through reduced listing flows rather than through immediate changes in prices or other market outcomes.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/nl_lp.png}
+    \caption{Dynamic Response of New Listing to Rate Gap}
+    \label{fig:lp_newlisting}
+\end{figure}
+
+
+\section{Mortgage Rate Gaps and the Dynamics of Local House Prices}
+\subsection{Baseline on Static Relationship}
+We now examine how mortgage rate gaps affect monthly house price growth. Our outcome variable is the log change in the Zillow Home Value Index (ZHVI). This measure provides a broad and relatively smooth indicator of home values across metropolitan areas. Unlike flows such as new listings or pending sales, prices tend to adjust slowly. A transaction is needed for a price to update, yet transaction volume falls in markets where lock-in becomes stronger. As a result, any supply pressure from reduced listings may appear as slower price growth rather than as an immediate change in prices.\\  
+
+To estimate the contemporaneous effect of the rate gap on price growth, we implement the  
+following two-stage least squares specification:
+\[
+\text{price\_chg}_{m,t}
+    = \beta\,\widehat{\text{rate\_gap}}_{m,t}
+      + X_{m,t}\gamma
+      + \mu_m + \tau_t + \varepsilon_{m,t},
+\]
+with the first stage
+\[
+\text{rate\_gap}_{m,t}
+    = \pi\, Z_{m,t}
+      + X_{m,t}\rho
+      + \mu_m + \tau_t + u_{m,t},
+\]
+where \(X_{m,t}\) includes unemployment, migration flows, and building permits. The instrument \(Z_{m,t}\) is the shift–share shock described in the Identification Strategy Section, and all regressions include metropolitan and month fixed effects with CBSA-clustered inference.\\
+
+Table \ref{tab:price_iv} reports the estimates for house price growth. The shift–share instrument strongly predicts the local rate gap, and the instrumented component is well identified. The second stage shows a negative and statistically significant relationship between the fitted rate gap and monthly house price growth ($\beta = -3.69$). A higher rate gap is associated with slower appreciation in the same month. One might expect lock-in to provide some support for prices by tightening effective supply. The static estimates do not show such a pattern. Instead, they point to weaker price growth immediately when the gap widens.\\
+
+Indeed, this finding is consistent with the broader macroeconomic environment. The rise in mortgage rates that creates the rate gap also reduces housing demand. In high-rate periods, the demand contraction is strong and offsets any short-run stabilizing force coming from tighter supply. The estimated effect therefore reflects the combined influence of slower demand and a smaller pool of active sellers.\\
+
+This interpretation aligns with the quantity evidence presented earlier. A larger rate gap reduces inventory, new listings, and pending sales, which shows that the lock-in channel is active. However, these supply constraints do not produce immediate upward pressure on prices. Reduced mobility also lowers buyer activity, and this joint contraction on both sides of the market keeps price growth subdued. As a result, the contemporaneous price effect is modest and negative, while the clearest lock-in response continues to appear in quantities. The dynamic analysis in the next section is better suited to capture how price growth evolves once these forces unfold over time.\\
+
+\begin{table}[ht!]
+\centering
+\begin{threeparttable}
+\caption{Effect of the Rate Gap on Monthly House Price Growth}
+\label{tab:price_iv}
+
+\begin{tabularx}{0.9\textwidth}{X X}
+\toprule
+ & \textbf{Baseline} \\
+\midrule
+\textbf{Dependent variable:} & House price growth (\%) \\[0.2em]
+
+Rate Gap & -3.693$^{*}$ \\
+ & (1.673) \\[0.2em]
+
+Unemployment rate & -0.006 \\
+ & (0.008) \\[0.2em]
+
+Migration rate & -0.209 \\
+ & (0.148) \\[0.2em]
+
+Building permits & 0.00026$^{***}$ \\
+ & (0.00006) \\
+
+\midrule
+CBSA fixed effects & Yes \\
+Month fixed effects & Yes \\
+Standard errors & Clustered by CBSA \\
+Observations & 24,779 \\
+Kleibergen--Paap F-stat. & 89.2 \\
+Wu--Hausman p-value & $7.8 \times 10^{-8}$ \\
+\bottomrule
+\end{tabularx}
+
+\begin{tablenotes}[flushleft]
+\footnotesize
+\item Notes: This table reports second-stage 2SLS estimates of the effect of the mortgage rate gap on monthly house price growth. The endogenous regressor is the rate gap, instrumented with the shift-share IV variable constructed from national mortgage-rate shocks and historical exposure. Standard errors are clustered at the CBSA level.
+\item $^{***} p < 0.01$, $^{**} p < 0.05$, $^{*} p < 0.1$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+
+\subsection{Robustness Check}
+We conduct several robustness checks to examine whether the reduced-form price results depend on sample choice or unusual observations. Table \ref{tab:price_iv_robust} reports the estimates. Across specifications, the rate gap is never associated with higher price growth. The sign of the coefficient is either negative or close to zero, and the instrument remains relevant in all samples.\\
+
+The first exercise trims the sample at the 5th and 95th percentiles of the rate-gap distribution within each CBSA. The coefficient on the fitted rate gap is negative and statistically significant. This confirms that the baseline result is not driven by extreme observations in the tails of the gap distribution.\\
+
+The second exercise splits the sample into high-gap and low-gap CBSAs, as defined by the median rate gap. In high-gap markets, the estimated effect of the rate gap on price growth is close to zero and not significant. In low-gap markets, the coefficient is negative and statistically significant, and its magnitude is somewhat larger than in the trimmed specification. This pattern suggests that weaker price growth is concentrated in areas where lock-in is less pronounced and the demand effect of higher rates is more visible. Where gaps are already high and lock-in is strong, reduced listings may help buffer prices against the demand shock, so the net price response is muted.\\
+
+The third exercise restricts the sample to the pre-hiking period from 2018 to 2022. The coefficient on the rate gap is again negative and significant, and the first-stage F-statistic remains well above conventional thresholds. This shows that the negative relationship between the rate gap and price growth is present even before the sharp tightening phase and is not driven solely by the extreme months at the end of the sample.\\
+
+Taken together, these robustness checks confirm that a higher rate gap is not associated with stronger price growth in any subsample immediately. Instead, price appreciation tends to slow when the gap widens, with the largest effects appearing in markets where demand is more exposed and lock-in is weaker. The quantity results show that lock-in robustly restricts listings and transactions, while the price results indicate that the net effect on house price growth depends on how the demand and supply forces interact in different market environments.\\
+
+
+\begin{table}[ht!]
+\centering
+\caption{Robustness Checks: Effects of Rate Gap on House Price Growth}
+\label{tab:price_iv_robust}
+
+\begin{tabularx}{\textwidth}{lXXXX}
+\toprule
+ & Trimmed & High Gap & Low Gap &  Pre-hiking \\ 
+ & 5-95 pct.  & &  & 2018--2022 \\ 
+\midrule
+\textbf{Rate Gap} 
+  & -4.122$^{**}$ & 0.163 & -4.763$^{***}$ & -2.926$^{**}$ \\
+  & (1.638) & (1.718) & (1.714) & (1.393) \\
+
+Unemployment rate 
+  & -0.0060 & 0.0193 & 0.0010 & -0.0053 \\
+  & (0.0070) & (0.0123) & (0.0107) & (0.0085) \\
+
+Migration rate 
+  & -0.1139 & 0.4952 & -0.2391 & -0.2133$^{*}$ \\
+  & (0.0719) & (0.4976) & (0.1644) & (0.1239) \\
+
+Building permits 
+  & 0.00027$^{***}$ & 0.00016$^{***}$ & 0.00032$^{***}$ & 0.00032$^{***}$ \\
+  & (0.00006) & (0.00004) & (0.00007) & (0.00006) \\
+
+\midrule
+Observations 
+  & 22,009 & 12,389 & 12,380 & 14,757 \\
+
+CBSA FE & Yes & Yes & Yes & Yes \\
+Month FE & Yes & Yes & Yes & Yes \\
+
+First-stage $F$-stat. 
+  & 93.9 & 212.8 & 37.8 & 37.3 \\
+
+\bottomrule
+\end{tabularx}
+
+\begin{minipage}{0.95\textwidth}
+\footnotesize
+\textit{Notes:} This table reports 2SLS estimates of the effect of the local rate gap on monthly house price growth across alternative subsamples. All models include CBSA and month fixed effects, and cluster standard errors at the CBSA level.
+Trimmed sample excludes observations outside the 5th--95th percentiles of the rate gap distribution.
+High-gap and low-gap subsamples are defined relative to the sample median.
+The pandemic period corresponds to 2020--2022.\\  
+$^{***} p < 0.01$, $^{**} p < 0.05$, $^{*} p < 0.1$.
+\end{minipage}
+\end{table}
+
+
+\subsection{Dynamic Response of House Prices to the Rate Gap}
+We examine how the mortgage rate gap affects local house price growth. The dependent variable is the month-to-month log change in the Zillow Home Value Index, after removing long-run trends using the HP filter. We estimate non-cumulative impulse responses with a local projection IV specification. The rate gap is instrumented with the shift-share-style variable. This approach recovers the short-run effect of an exogenous increase in the local rate gap on cyclical house price growth.\\
+
+Local projections at long horizons have widening confidence intervals. To keep identification strong, we report the response over the first six months. During this window, the estimates are stable and the confidence intervals remain tight, and Instrument variable remain relatively reliable. This short horizon captures the part of the adjustment that is most informative about the lock-in mechanism.\\
+
+Figure \ref{fig:LP_base} shows that house price growth experiences a pronounced decline in the first one to three months.This pattern is consistent with a contraction in housing demand when borrowing costs rise. Starting around the 4th month, the estimates move increasingly close to zero. By 6th month, the point estimates are close to zero and the confidence intervals contain both small negative and small positive effects. The short-run decline in price growth is therefore modest and not persistent.\\
+
+This pattern matches established evidence in the housing literature. Prices adjust slowly, while quantities respond more quickly. Search frictions and bargaining delays create muted short-run movements in monthly price data, as documented by \cite{31_doi:10.1086/697207} and \cite{13_greenwald_mortgage_2018}. Our results follow this regularity. The decline in new listings is sharp and precisely estimated, while the price response is small and imprecise.\\
+
+The broader evidence also points to a clear interpretation. A larger rate gap reduces market liquidity but produces only a limited short-run effect on local house prices. Prior work by \cite{32_FERREIRA201034} and by \cite{33_MOLLOY2022103427} shows that lock-in restricts mobility without causing large price movements. Our results reinforce this view. They show that mortgage lock-in operates mainly through quantity adjustments, while price growth responds only gradually and with substantial noise.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/LP_base.png}
+    \caption{House price dynamic under rate gap shocks, 2018–2024}
+    \label{fig:LP_base}
+\end{figure}
+
+\section{Heterogeneous Price Responses Across Local Housing Markets}
+\subsection{Heterogeneity by Local Employment Growth}
+Differences in local economic conditions also shape how house prices respond to a rise in the rate gap. To study this channel, CBSAs are divided by recent employment growth. Markets with stronger labor market performance tend to have tighter housing demand and more active buyer pools. These features may influence how quickly prices adjust when refinancing becomes more constrained.\\
+
+Figure \ref{fig:LP_emp} reports the impulse responses for horizons from one to six months. House price growth declines more sharply in high-employment-growth markets during the first few months. The initial slowdown is larger and the response rises toward zero around month four. In contrast, markets with weak employment growth show little movement. Their responses stay close to zero at all horizons.\\
+
+The short-run price effect of a higher rate gap is stronger where underlying demand is more resilient. High-growth markets enter the adjustment period with tight conditions and deeper buyer pools. When the rate gap widens, demand cools and supply pulls back through the lock-in channel. The combination produces a temporary decline in price growth before conditions stabilize. In low-growth markets, weak demand and a modest supply contraction leave little room for a noticeable price response.\\
+
+Taken together, the results show that the impact of the rate gap depends on local fundamentals. A clear slowdown in price growth emerges only in markets that began with strong demand. In softer markets, the effect is small and imprecise. This pattern is consistent with the lock-in channel interacting with underlying economic strength, with price movements appearing primarily where demand conditions are tighter.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/LP_emp.png}
+    \caption{House price dynamic under rate gap shocks(Employment level), 2018–2024}
+    \label{fig:LP_emp}
+\end{figure}
+
+
+\subsection{Heterogeneity by Local Land Supply Elasticity}
+Local conditions of land supply provide another source of variation in the price response. Supply elasticity, measured using the \cite{29_10.1162/qjec.2010.125.3.1253} index, captures how geographic and regulatory constraints limit new construction. To examine this channel, CBSAs are divided into high- and low-elasticity groups, and separate local projection IV responses are estimated for each group.\\
+
+Figure \ref{fig:LP_saiz} shows a clear divergence across supply conditions. House price growth declines in high-elasticity markets during the first few months after a rise in the rate gap, while the response in low-elasticity markets remains close to zero. In areas where new construction can adjust, part of the shock from reduced listings and lower liquidity is cleared through faster movements in price growth. In contrast, geographic constraints in low-elasticity markets prevent supply from adjusting, so the short-run response occurs mainly through reduced turnover rather than price movements. These patterns indicate that elastic markets rely more on prices to restore equilibrium, while inelastic markets absorb the lock-in shock almost entirely through quantities.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/LP_saiz.png}
+    \caption{House price dynamic under rate gap shocks(Land elasticity), 2018–2024}
+    \label{fig:LP_saiz}
+\end{figure}
+
+\section{Conclusion}
+This paper examines how housing markets adjust to sharp increases in mortgage rates when most borrowers hold fixed-rate contracts. The results show a clear imbalance in the short-run adjustment process. Measures of market activity respond quickly and strongly, while house price growth reacts more slowly and with much smaller magnitude. This difference in timing is robust across specifications and appears consistently in the dynamic analysis.\\
+
+The evidence points to mortgage lock-in as the key force behind this pattern. As the rate gap widens, many homeowners delay listing, even as higher borrowing costs weaken demand. Market liquidity therefore contracts before prices adjust. In places with stronger demand or more elastic supply, price responses are more visible, but they remain modest in the short run. These findings suggest that monetary tightening can suppress housing market activity without generating rapid price declines, altering the usual link between interest rates and housing prices.\\
+
+
+
+\end{document}
 
