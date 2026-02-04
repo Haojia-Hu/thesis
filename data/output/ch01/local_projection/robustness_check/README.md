@@ -145,6 +145,38 @@ Files include:
 
 ---
 
+### 5. All macro controls lagged
+
+**Purpose**
+
+This robustness check lags all macroeconomic control variables by one period
+to ensure controls are predetermined relative to the regression error.
+
+**Difference from baseline**
+
+- Baseline uses contemporaneous macro controls: `D_*`
+- Robustness replaces them with lagged controls: `L1_D_*`
+  (`L1_D_CpiAgg`, `L1_D_EPU`, `L1_D_ConsumerSent`, `L1_D_Unemployment`,
+   `L1_D_RDI`, `L1_D_Mortgage`)
+- Core regressors remain unchanged (lagged attention and interactions).
+
+**Code**
+
+code/ch01/03_expectation_formation/06_robustness_check/05_lag_all_macro_controls.R
+
+
+**Outputs**
+
+data/output/ch01/local_projection/robustness_check/lag_all_macro_controls/
+
+
+Files include:
+- `irf_lag_all_macro_controls.csv`
+- `coef_path_lag_all_macro_controls.csv`
+- `fig_irf_interactions_lag_all_macro_controls.png`
+
+---
+
 ## Notes
 
 - Each robustness check has its **own subfolder** containing regression outputs
