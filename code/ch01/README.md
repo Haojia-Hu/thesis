@@ -18,10 +18,10 @@ Each subfolder contains its own README with detailed documentation.
 ## Folder structure
 
 code/ch01/
-├── 01_index/
-├── 02_attention_cycles/
-├── 03_expectation_formation/
-└── README.md
+- ├── 01_index/
+- ├── 02_attention_cycles/
+- ├── 03_expectation_formation/
+- └── README.md
 
 
 ---
