@@ -193,7 +193,7 @@ specific categories by excluding selected categories from the sample.
 **Code**
 
 code/ch01/03_expectation_formation/04_build_panel_data_filtered.R
-code/ch01/03_expectation_formation/06_robustness_check/06_exclude_selected_categories.R
+code/ch01/03_expectation_formation/06_robustness_check/06_after_cleaning_filtered_panel.R.R
 
 
 **Inputs**
