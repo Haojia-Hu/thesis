@@ -1,1 +1,570 @@
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    \noindent {This paper studies how households allocate attention across consumption categories and how this process shapes the formation of inflation expectations. Using Google Trends data, we construct category-level attention indices and document clear cyclical patterns that differ in length and stability across goods. These dynamics provide a structured basis for analyzing how attention interacts with economic signals. Using a local projection framework, we show that attention significantly amplifies the effect of price changes on inflation expectations, particularly in categories with short and stable attention cycles, while filtering out noisy signals such as price volatility. Robustness checks confirm that this amplification is not driven by specification choices or coincidental correlation. Additional panel evidence shows that attention itself responds to price movements and macroeconomic beliefs, indicating that it is an endogenous component of information processing. The findings highlight attention as a selective mechanism that governs which price signals enter expectation formation, offering new insights into household beliefs and informational frictions.}
+\end{abstract}
+
+\begin{keywords}
+    {Household Attention Frictions; Attention Cycles; Rational Inattention; Inflation Expectations}
+\end{keywords}
+
+
+
+
+\section{Introduction}
+In a world of constant information flow, attention functions as a scarce cognitive resource that shapes economic decision-making. Households cannot absorb all signals around them. They must decide which information to notice and which to ignore. Classic theories of limited attention emphasize this constraint and view attention as a strategic choice rather than a passive reaction \citep{heitmayer_second_2025}. These ideas highlight a simple fact: consumers process only part of the information they encounter, and they devote their limited capacity toward selected items that seem useful or relevant.\\
+
+Rational inattention theory formalizes this idea by treating attention as an input that comes with a cost. Agents choose which signals to monitor, and they do so in a way that reflects both cognitive limits and economic incentives \citep{SIMS2003}. \cite{gabaix_sparsity-based_2014}, often captured by sparse maximization, shows that people adjust their focus when conditions change. They respond to shocks by updating beliefs about variables that appear most important while ignoring others. In both frameworks, attention moves with the environment and becomes central to how expectations are formed.\\
+
+Research on salience provides an additional perspective. Prices that vary more tend to attract more attention, and households often react more strongly to those visible fluctuations \citep{62_Salience}. These patterns are not fixed. They shift with economic events and differ across goods. This implies that understanding how households allocate attention, and how this allocation evolves, is essential for understanding their beliefs about inflation and the broader economy.\\
+
+Empirical work, however, has not kept pace with these theoretical insights. Existing studies usually assume that attention is fixed over time or similar across products. They rarely examine how attention changes across categories or its cyclical nature. This paper addresses this gap by introducing the concept of the Household Attention Cycle. The idea captures how people repeatedly return to certain goods with a rhythm that varies across consumption categories. Using Google Trends data, we construct a category-level Attention Index and identify clear and systematic differences in these cycles.\\
+
+We then turn to the economic role of these attention cycles. The first question is whether these cycles carry meaningful structure rather than noise. The evidence shows that attention follows clear and repeatable patterns across goods, which supports the view that households monitor categories in a systematic way. The second question is how these patterns shape the formation of inflation expectations. We find that attention strengthens the effect of price changes on expectations, especially when the underlying attention cycle is short and stable. At the same time, attention does not increase the influence of volatile prices. Instead, it weakens or filters out those noisy signals. These results suggest that attention acts as a selective channel that magnifies clear price movements while down-weighting uncertainty.\\
+
+Overall, the analysis shows that household attention can be measured, organized, and used in a systematic way. The approach moves beyond indirect proxies and provides a direct method for tracking how consumers focus on different goods over time. It also links these attention patterns to the process of expectation formation in a clearer and more structured manner than previous work. By combining high-frequency search data with time–series and panel methods, the paper offers a framework for studying attention as an evolving component of household behavior. This perspective helps integrate attention into macroeconomic analysis in a way that is both empirically grounded and consistent with theories of limited information processing.\\
+
+The remainder of the chapter proceeds as follows. Section 2 describes the construction of the household attention measures, including the category structure, keyword selection, and the aggregation of search data into monthly indices. Section 3 documents the cyclical properties of household attention using both time-domain and frequency-domain methods, and examines their short-run predictability and heterogeneity across goods. Section 4 introduces the empirical framework linking attention to inflation expectations, presents the baseline results, and evaluates the amplification role of attention. Section 5 provides a series of robustness checks to assess specification stability and model identification. Section 6 analyzes heterogeneity across commodity groups based on the structure of their attention cycles. Section 7 investigates whether household attention is itself influenced by economic conditions. Section 8 concludes with a discussion of the broader implications for expectation formation under informational frictions.\\
+
+
+\section{Literature Review}
+A growing body of research examines how limited attention shapes economic behavior, especially in the formation of macroeconomic expectations. Attention is increasingly viewed as a scarce cognitive resource with real opportunity costs \citep{heitmayer_second_2025}. Under rational inattention \citep{SIMS2003}, agents choose which signals to monitor based on the cost of information and its value. \citet{gabaix_sparsity-based_2014} extend this idea with sparse maximization, showing that agents shift their focus after shocks and update beliefs about salient variables. Salience theory offers a related view: goods with greater volatility attract more attention and influence decisions more strongly \citep{62_Salience}. Together, these frameworks argue that attention is strategic and shaped by the surrounding environment.\\
+
+Empirical work applies these ideas to both macroeconomic expectations and firm behavior. Several studies examine how households and firms allocate attention to indicators such as growth, interest rates, or monetary policy. \citet{6_attention-to-macro} show that attention varies with exposure, information costs, and past experience. \citet{23-zidong-an} develop a general equilibrium model with inattentive agents and find that procyclical inattention strengthens monetary policy effects. Firm-level evidence reveals similar patterns. \citet{9_attention_cycle_2024} show that cognitive costs drive countercyclical attention, especially during downturns. \citet{25_yang_rational_2022} integrate rational inattention with menu costs in multiproduct firms and find faster price adjustment and weaker policy passthrough. \citet{24_song_firm_2024} use earnings call text to measure firms’ macroeconomic focus and report asymmetric responses linked to information-processing differences. This work suggests that firms, unlike households, tend to exhibit more concentrated and expert-driven attention \citep{41_infriction, 42_goldstein_tracking_2023}.\\
+
+More recent studies focus directly on household attention and inflation dynamics. These papers move away from the full-information rational expectations assumption and argue that households form expectations under meaningful attention constraints \citep{28_NBERw32488}. When inflation is low, consumers pay little attention, but their focus increases once inflation becomes high and persistent \citep{22_who_cares}. Evidence points to an “attention threshold” between 2 and 4 percent. Once inflation crosses this range, public attention rises sharply \citep{39_korenok_inflation_2023, 32_pfauti_inflation_nodate, 40_bracha_inflation_2024}. \citet{22_who_cares} show that low attention can slow recovery and complicate policy design near the lower bound. Another line of work studies how households allocate attention across consumption categories. \citet{18_dietrich_consumption_2024} and \citet{34_Campos2022UnderstandingWP} find that people overweight frequently purchased goods, such as food or energy, when forming inflation expectations. Media reporting reinforces these patterns. When particular categories receive heavier coverage, they influence expectations more strongly. These findings suggest that household attention is selective and often drawn toward volatile or salient prices, consistent with behavioral theories.\\
+
+Despite these advances, two methodological gaps remain. Most studies infer attention indirectly by observing how expectations react to past prices, rather than measuring attention directly. Attention is also frequently treated as stable or aggregated, which obscures its variation across goods and over time. Although \citet{42_goldstein_tracking_2023} attempt to measure attention through forecast deviations, they find little evidence of cyclical behavior. This leaves open whether household attention fluctuates in systematic ways across consumption categories.\\
+
+Recent work begins to address these gaps by examining micro-level mechanisms. Several studies show that households update expectations based mainly on prices of items they actually purchase, not on aggregate CPI or central bank communication \citep{44_10.1257/mac.20150147, 38_10.1257/jep.36.3.157, 21_doi:10.1086/713192}. \citet{32_pfauti_inflation_nodate} highlight the role of news in reducing information costs and shaping attention. Yet a direct and comprehensive analysis of attention to specific goods, and how this attention evolves, is still missing.\\
+
+A final challenge concerns measurement. Three approaches dominate the literature. The first infers attention from the sensitivity of expectations to past inflation \citep{22_who_cares}. The second uses survey data on forecast errors or revisions \citep{23-zidong-an, 40_bracha_inflation_2024, 28_NBERw32488, 32_pfauti_inflation_nodate}. The third relies on behavioral proxies, such as Google Trends or social media metrics, to track information searches in real time \citep{39_korenok_inflation_2023, 32_pfauti_inflation_nodate}. Each offers useful information, but none provides a high-frequency and category-specific view of attention dynamics.\\
+
+This study uses web search behavior to fill this gap. Using Google Trends, we construct a commodity-level Attention Index that tracks how household focus shifts across goods and over time. This allows us to identify recurring attention cycles and examine how these patterns shape responses to price movements and inflation expectations. By introducing the concept of the household attention cycle and documenting its economic implications, we offer a new perspective on expectation formation and highlight implications for more targeted communication strategies.\\
+
+
+\section{Data}
+
+\subsection{Goods classification}
+We begin by organizing goods into behaviorally meaningful consumption groups. This classification helps identify how household attention varies across categories. It also provides a structure that guides how we map search activity to consumption behavior. We rely on the CPI product taxonomy because it aligns closely with household-level consumption dynamics. The CPI focuses on consumer purchases and excludes institutional spending, which ensures that our analysis remains centered on household decision makers. Using the CPI structure also allows us to link attention measures directly to price indices later in the analysis, which keeps the construction of our variables consistent.\\
+
+The CPI classification also reflects substitution patterns and price volatility across groups. These design features make it useful for identifying categories where price changes are more visible and likely to trigger attention. Based on this system, we adopt an 11–category structure that offers a consistent framework for documenting systematic differences in how households monitor goods over time.\\
+
+\begin{table}
+\centering
+\caption{Goods Categories and Representative Content}
+\begin{tabular}{lp{7.5cm}}
+\toprule
+\textbf{CPI Categories} & \textbf{Content/Example} \\
+\midrule
+Apparel & Men's (boys’) and Women’s (girls’) apparel; Footwear; Jewelry and watches \\
+\midrule
+Communication & Postage and delivery services; Information service; Information technology, hardware and service \\
+\midrule
+Education & Education supplies; Tuition and other school fee \\
+\midrule
+Energy & Energy commodities; Energy service \\
+\midrule
+Foods \& Beverages & Food at home; Food away from home; Non-alcoholic beverages; Alcoholic beverages \\
+\midrule
+Housing & Shelter; Utilities; Household furnishings and operations \\
+\midrule
+Medical care & Medical care commodities and service; Hospital and related service; Health insurance \\
+\midrule
+Personal care & Personal care products and services; Miscellaneous (like legal, finance, etc.) \\
+\midrule
+Recreation & Video and audio; Pets related products and services; Sporting goods; Photography; Reading; Other products and services \\
+\midrule
+Tobacco and smoking products & Cigarettes and other products \\
+\midrule
+Transportation & Private transportation (New/Used Vehicles, Maintenance and repair); Public transportation \\
+\bottomrule
+\end{tabular}
+\label{tab:goods_categories}
+\end{table}
+
+The categories in Table~\ref{tab:goods_categories} serve as the foundation for the construction of our attention measures and allow us to examine how attention differs across major components of household consumption.\\
+
+
+\subsection{Household Attention}
+\subsubsection{Data Source and Coverage}
+To measure household attention directly, we use Google Trends. Google Trends has provided search volume data since 2004, and it remains one of the most widely used tools for tracking real-time information–seeking behavior \citep{51_JUN201869}. The platform captures large-scale activity. More than five billion searches occur on Google each day, and the search engine consistently maintains an 85 percent market share in the United States. This dominance ensures that the data reflect broad patterns in public information demand. Figure~\ref{search_engine} shows the search engine market distribution, illustrating Google’s dominance\\
+
+Our dataset spans January 2004 through December 2024. The long time horizon ensures consistency across categories and allows us to study attention dynamics over two decades. High internet penetration further supports the representativeness of search data. As of 2023, more than 95 percent of U.S. adults used the internet, and most had access to smartphones or home broadband \citep{pew_gelles-watnick_americans_2024}. These conditions make web search a natural source of information on household attention.\\
+
+\begin{figure}
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/fig2.png}
+\end{center}
+\caption{Search engines market share in the US.}
+\label{search_engine}
+\end{figure}
+
+\subsubsection{Why Search Activity Captures Attention}
+Search activity provides a targeted signal of information demand. Users initiate queries intentionally, refine them, and decide when to search. This active behavior contrasts with passive exposure on social networks. \citet{52_morris_comparison_2010} show that search engines yield more relevant and reliable information than crowd-sourced responses on social media platforms. Similarly, \citet{53_doi:10.1287/mnsc.2022.02154} find that intent-driven searches are more informative and more likely to reflect genuine needs than searches triggered by advertisements or incidental browsing. These findings support the use of Google search volumes as a meaningful indicator of household attention.\\
+
+\subsubsection{Google Trends Index Extraction}
+Google Trends reports normalized search indices rather than raw search volumes. Each index reflects the number of queries for a term relative to total searches within a region and time window. Google then rescales this value to a 0–100 range, where 100 corresponds to the maximum popularity during the period \citep{google_basics_2025}. This normalization makes the series comparable across time but means the values capture relative, not absolute, search intensity. To account for differences in baseline popularity across items, we apply standardization procedures before constructing category-level measures.\\
+
+\subsubsection{Rationale for Using Search Data in Economic Analysis}
+Additionally, Google Trends offers two types of inputs: search terms and topics. Search terms capture exact user entries. Topics are algorithmically constructed categories that pool related phrases across languages, spellings, and contexts. Because our interest lies in attention toward broad consumption categories, we use topics. They reduce fragmentation due to wording differences and filter unrelated contexts more effectively. To ensure robustness, we validate each topic with representative search terms and apply filters to reduce noise from ambiguous queries \citep{google_topic_2025, 47_info:doi/10.2196/42446}. This approach yields a cleaner measure of attention directed at specific goods rather than brands or isolated items.\\
+
+Google Trends has become a standard tool for measuring real-time information-seeking behavior in diverse fields, including finance, marketing, public health, and macroeconomics \citep{51_JUN201869, google_faq_2025}. As an anonymized, high-frequency, and region-specific dataset, it helps overcome limitations common in traditional surveys such as recall bias, infrequent collection, and social desirability bias. Normalized search indices track shifts in public interest and are therefore suited for analyzing the dynamics of household attention across goods and over time.\\
+
+
+\subsection{Complementary Data for Control Variables}
+\subsubsection{Price Data}
+Prices are a natural source of information for households. Price changes are visible in daily life, and consumers interact with them repeatedly. To capture these dynamics, we use detailed CPI data from the Bureau of Labor Statistics. The CPI classification aligns cleanly with our categories and provides monthly indices that match the frequency of the search data.\\
+
+\subsubsection{Media Data}
+News coverage also shapes public attention. Modern information flows are fast and pervasive. To capture media influence, we use the Factiva database. We collect English-language articles from U.S. outlets and construct category-specific news measures using keyword filters. This ensures consistency with our goods classification and keeps the focus on domestic attention dynamics.\\
+
+\subsubsection{Macroeconomic Variables}
+We also include macroeconomic controls that influence household perception and behavior. Our set includes the Consumer Confidence Index, Economic Policy Uncertainty Index, the 30-year mortgage rate, Real Disposable Income, and the Unemployment Rate. These variables reflect broad economic conditions that may interact with attention or shape expectations. All series are taken from the FRED database and are collected at a monthly frequency from January 2004 through December 2024. This period aligns with the Google Trends data, ensuring temporal comparability across all sources.\\
+
+
+\section{Quantification of Household Attention}
+\subsection{Category Structure and Keyword Selection}
+Our goal is to measure household attention across eleven broad consumption categories. Each category contains several subgroups. For instance, the “Food” category includes meats, dairy, seafood, beverages, and other items. To capture these distinctions, we construct category-level attention indices from multiple sub-keywords rather than relying on a single general term.\\
+
+This approach improves measurement precision and reduces semantic ambiguity. Prior work supports this strategy. \cite{55_narita_search_2018} emphasize that disaggregated search terms can isolate distinct search behavior. \cite{54_cao_keyword_2022} show that keyword portfolios with a diverse set of related terms better capture consumer intent and outperform single-term measures. Following this insight, we select representative sub-keywords for each CPI-based category and treat them as the building blocks of the attention index \citep{google_advanced_2025}.Based on the detailed subcategories listed in Table~\ref{tab:goods_categories}, we match each main category with a set of relevant search items. These items serve as the input for collecting Google Trends search data.\\
+
+\subsection{Google Trends Data and Normalization}
+Google Trends reports relative search indices based on the highest-volume term within each query. It also restricts each query to a maximum of five terms. As a result, search indices from separate queries cannot be compared directly. This presents a clear measurement problem because the sub-keywords in most of  each category exceed the five-term limit.\\
+
+To address this issue, we follow \cite{48_fowle_using_2020} and introduce a control keyword that appears in every query. The control term must have stable and relatively high search volume (always be 100 in our google trend platform). In the energy category, for example, we use “electricity” as the reference item. Each query includes four sub-keywords plus the control term. Google Trends then normalizes the entire set with respect to the highest observed value, which allows the control term to act as a common benchmark across queries. This procedure creates a consistent scale for all sub-keywords. After retrieving the normalized values, we combine overlapping segments and align the series across queries to construct standardized subcategory indices.\\
+
+\subsection{Aggregation into Category-Level Attention Measures}
+To form a category-level attention index, we aggregate standardized sub-keyword series using average consumption expenditure shares. These shares come from the Consumer Expenditure Survey conducted by the U.S. Bureau of Labor Statistics. For each main category, we compute the average expenditure weight across matched subgroups.\\
+
+This weighting scheme reflects households’ actual spending patterns. \cite{18_dietrich_consumption_2024} show that attention to price information often follows expenditure relevance. \cite{56_10.1093/restud/rdab061} similarly highlight the importance of weighting rules when modeling heterogeneity in household behavior. After applying expenditure weights, we obtain a single attention index for each category that incorporates both search intensity and consumption importance.\\
+
+\subsection{Creating category-level Indices}
+Before presenting the category-level attention indices, we standardize each series using a within-category Min–Max transformation. For each category, the composite index is 
+rescaled to the 0–1 interval by subtracting its minimum and dividing by its full range. This approach preserves the time-series shape of each index while removing differences in 
+baseline search volume across categories. A value of 1 represents the highest level of attention observed for that category during the sample period, and a value of 0 marks its 
+lowest point. The standardized series therefore allow comparisons of trends and relative movements across categories without implying comparability of absolute attention levels.\\
+
+Figure~\ref{attention_index} plots the standardized attention indices for the eleven consumption categories. The figure shows how attention has evolved over time and illustrates 
+clear differences across goods. Energy-related searches rise noticeably after 2020, reflecting heightened public concern during the post-pandamic inflation period. Education and 
+personal care also exhibit a gradual upward trend. Other categories, such as recreation, communication, or tobacco, remain relatively stable. These patterns provide an initial view 
+of how household attention shifts over time in response to economic conditions.\\
+
+
+\begin{figure}
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/original_data.png}
+\end{center}
+\caption{Original Data from Google Trends (by Categories)}
+\label{attention_index}
+\end{figure}
+
+The standardized indices contain long-run movements and seasonal patterns. To focus on short-term fluctuations, we remove deterministic trends and seasonality as part of the 
+preprocessing. Unit root tests confirm that the detrended series remain non-stationary, which motivates the use of first differences in our empirical analysis. To isolate short-run changes, we take the first difference of each standardized index. Figure~\ref{first_diff} shows the month-to-month change in household attention across 
+categories. This transformation removes remaining trends and produces a stationary series that is suitable for time-series analysis. Economically, the first-differenced series captures how household attention shifts from one month to the next in response to new information, price movements, or unexpected events. These short-run changes form the basis 
+for the empirical work in the following sections.\\
+
+\begin{figure}
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/first_diff.png}
+\end{center}
+\caption{First-Difference of Household Attention}
+\label{first_diff}
+\end{figure}
+
+
+\section{Household Attention Cycle}
+\subsection{Empirical Evidence of Cyclical Dynamics in Household Attention}
+To examine whether household attention follows systematic cycles rather than fluctuating randomly, we rely on two complementary approaches: autoregressive (AR) modeling in the time domain and Fast Fourier Transform (FFT) in the frequency domain. Both are applied to the first-differenced attention indices for each consumption category. We use differenced series because the original indices display non-stationary behavior, and differencing isolates short-run adjustments that can reveal recurring patterns.\\
+
+Table~\ref{tab:ar_fft_comparison} summarizes the findings from the two methods. The evidence points to short-run cycles in many categories, often lasting between three and six months. Apparel, communication, education, food, housing, and personal care show particularly clear cyclical structures. A few categories behave differently. Recreation presents longer cycles, while tobacco exhibits only weak periodicity. These differences already hint at meaningful variation across goods, suggesting that attention may follow regular seasonal or habitual rhythms for some categories and more irregular patterns for others.\\
+
+The agreement between AR-based and FFT-based measures strengthens the conclusion that household attention is not merely statistical noise. Instead, attention evolves in recurrent patterns that are partly predictable and economically meaningful. This finding matters for later sections because it supports the idea that attention should be treated as an evolving state variable when studying expectation formation or household responses to economic signals. In other words, attention is not a passive byproduct of search data; it has its own structure that can be measured and anticipated.\\
+
+\begin{table}
+\centering
+\caption{Comparison of AR and FFT Based Attention Cycles}
+\begin{tabular}{lccccccc}
+\toprule
+\multirow{\textbf{Category}} & \textbf{AR} & \textbf{AR} & \textbf{AR} & \multicolumn{3}{c}{\textbf{FFT Periods}} \\
+\cmidrule(lr){5-7}
+& \textbf{Has Cycle} & \textbf{Order} & \textbf{Period} & \textbf{Main} & \textbf{Second} & \textbf{Third} \\
+\midrule
+Apparel         & TRUE  & 2 & 3.53 & 3.63 & 4.46 & 3.02 \\
+Communication   & TRUE  & 2 & 4.22 & 2.67 & 4.31 & 3.43 \\
+Education       & TRUE  & 4 & 5.53 & 3.02 & 2.67 & 3.06 \\
+Energy          & TRUE  & 4 & 3.78 & 2.05 & 2.07 & 2.03 \\
+Food            & TRUE  & 4 & 6.01 & 5.91 & 2.85 & 2.35 \\
+Housing         & TRUE  & 4 & 5.84 & 2.95 & 5.18 & 5.08 \\
+Medical Care    & TRUE  & 3 & 4.42 & 2.27 & 4.03 & 2.89 \\
+Personal Care   & TRUE  & 3 & 4.88 & 4.88 & 5.64 & 2.05 \\
+Recreation      & FALSE & 0 & NA   & 11.50 & 2.25 & 2.27 \\
+Tobacco         & FALSE & 1 & NA   & 2.29 & 2.02 & 2.25 \\
+Transportation  & TRUE  & 2 & 3.48 & 2.54 & 3.30 & 4.31 \\
+\bottomrule
+\end{tabular}
+\label{tab:ar_fft_comparison}
+\end{table}
+
+\subsection{Short-Term Predictability of Household Attention}
+If attention follows a cycle, it should also display short-term predictability. To assess this idea, we estimate univariate AR models for each differenced attention index. Lag lengths are chosen using the Bayesian Information Criterion (BIC). We then use the fitted models to generate one-year-ahead forecasts. The goal is not to build a forecasting system, but to test whether recent patterns contain enough structure to predict near-term changes.\\
+
+For several categories—such as apparel, energy, housing, and personal care—the forecasts capture momentum or reversion, indicating that past attention levels help predict next month's search intensity. For communication and food, the forecasts are flatter, reflecting more stable dynamics and muted autocorrelation.These results show that attention is not a white-noise process. Even simple AR models generate meaningful forecasts for many categories. Although they do not detect longer cycles, they capture short-run adjustments well enough to reinforce the idea that attention behaves like a structured process. Combined with the frequency-domain evidence, this supports treating household attention as a state variable with its own predictable component.\\
+
+\subsection{Heterogeneity in Household Attention Cycles}
+The presence of cycles raises an additional question: do all consumption categories follow similar patterns, or are some goods associated with more stable or more volatile attention dynamics? To answer this, we apply a rolling FFT to each category. This method reveals how cycle lengths shift over time, allowing us to distinguish persistent patterns from episodic ones.\\
+
+From the rolling FFT results, we extract two summary statistics. The first is the mean cycle length, which reflects the typical rhythm of attention for each category. The second is the standard deviation of cycle length, which indicates how stable or irregular this rhythm is. A small standard deviation points to regular cycles shaped by habits or seasonality. A large one points to cycles that move sharply when shocks or special events occur. Using these two measures, we classify categories through a simple clustering procedure. Figure~\ref{fft_cluster} plots average cycle length on the x-axis and volatility on the y-axis. Two broad groups emerge. The first group—food, apparel, education, and medical care—features short and stable cycles. These goods tend to be part of routine household spending, and their attention patterns move with regular rhythms. The second group—energy, recreation, and transportation—has longer and more volatile cycles. These categories are more sensitive to external events, such as energy shocks, weather disruptions, or transportation interruptions. Their attention dynamics follow a more episodic pattern.\\
+
+This heterogeneity is important. It shows that attention does not move in the same way across all goods. Some categories follow predictable and steady cycles. Others are driven by events and fluctuate more sharply. Understanding these differences helps clarify how attention interacts with economic conditions and why certain price signals may influence expectations more strongly than others. These insights guide the next sections, where we analyze how attention shapes the transmission of price changes into consumer beliefs.\\
+
+\begin{figure}
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/FFT_cluster.png}
+\end{center}
+\caption{Heterogeneity in Household Attention Cycles: Mean Period vs. Volatility Clustering}
+\label{fft_cluster}
+\end{figure}
+
+
+\section{Household Information Expectation Formation}
+Household attention displays clear structure and predictable cycles. We now examine whether this structure has meaningful consequences for expectation formation. The central hypothesis is that attention does not simply describe which goods consumers notice. Instead, it shapes how consumers interpret incoming signals, and determines which pieces of information enter the belief-updating process. This section lays out the conceptual motivation, develops the empirical framework, and presents the baseline evidence on how attention conditions the response of inflation expectations to price and volatility shocks.\\
+
+\subsection{Modeling Framework: Attention and Price Signals}
+The starting point is a simple question: even if households observe prices, what determines how these prices influence their beliefs about aggregate inflation? In standard models of information frictions, agents face incomplete or noisy information and must decide what to extract from the signals they receive. The Lucas (1972) island model is a well-known example. In this setting, firms observe their own price changes but cannot perfectly distinguish between idiosyncratic and aggregate shocks. This limited information environment causes systematic misperceptions whenever signals are ambiguous or context is missing \citep{61_ANDRADE202240, 63_LUCAS1972103}.\\
+
+A similar mechanism arises for households. Consumers monitor some categories more closely than others. They may also attach different psychological weights to price changes depending on salience, volatility, or personal relevance. When a household pays more attention to a particular category, the associated price movements become more prominent and easier to recall. As a result, these price movements may exert disproportionate influence on the perception of overall inflation—even if the underlying shock is local or temporary.\\
+
+This perspective connects naturally to theories of bounded rationality. Sparse maximization \citep{gabaix_sparsity-based_2014} predicts that agents selectively update beliefs based on the few signals that stand out, while rational inattention \citep{SIMS2003} emphasizes that information acquisition is costly and therefore uneven across signals. Both views imply that attention shapes the mapping from observed economic data to expectations. In this sense, attention acts as a filter. It amplifies clear, directional signals while reducing the influence of noise, ambiguity, or highly volatile changes that may convey less useful information.\\
+
+Building on these insights, we consider an environment where households form inflation expectations after observing a subset of good-level price changes. At time $t$, the household observes the price of good $i$ and forms an expectation about aggregate inflation according to: $E(p_t \mid I_t)$, where $I_{i,t}$ represents a limited and selective information set. The perceived relative-price signal is given by:
+\begin{equation}
+s_{i,t} = p_{i,t} - E(p_t \mid I_{i,t}),
+\end{equation}
+The degree of attention allocated to category $i$ determines how strongly $s_{i,t}$ influences the household’s beliefs about the aggregate price level. With higher attention, the same price change may generate a larger perceived deviation from aggregate inflation, thereby producing a stronger update in expectations.\\
+
+Therefore, this framework implies two testable predictions about how households process economic signals. When attention to a category is high, directional price changes should exert a stronger influence on inflation expectations because attentive consumers are more likely to interpret these changes as informative about broader inflation conditions. In contrast, price volatility should not display the same amplification pattern. Volatile or irregular movements are harder to interpret, contain less signal about aggregate conditions, and are therefore more likely to be discounted even when attention is elevated. These implications guide the empirical analysis that follows.\\
+
+
+\subsection{Empirical Specification}
+To measure how attention conditions the response of inflation expectations, we estimate a set of local projection regressions. The focus is on the $h$-period-ahead change in the aggregate inflation expectation series $\Delta \mathrm{InflationExp}_{t+h}$, and the baseline specification is:
+\begin{equation}
+\resizebox{\textwidth}{!}{%
+\begin{aligned}
+\Delta \text{InflationExp}_{t+h} =\ & \alpha_h + \gamma_h \cdot \text{Attention}_{t\!-\!1}^i + \beta_h \cdot \Delta \text{PriceChange}_t^i + \psi_h \cdot \Delta \text{Volatility}_t^i \\
+& + \eta_h \cdot \left( \text{Attention}_{t\!-\!1}^i \times \Delta \text{PriceChange}_t^i \right) + \kappa_h \cdot \left( \text{Attention}_{t\!-\!1}^i \times \Delta \text{Volatility}_t^i \right) \\
+& + \theta_h \cdot \Delta\pi_t^{agg} + \sum_k \lambda_{k,h} \cdot \Delta Z_{k,t} + $\mu_i$ + \varepsilon_{t+h}
+\end{aligned}%
+}
+\end{equation}
+\begin{itemize}
+    \item $\Delta \text{InflationExp}_{t+h}$: $h$-step-ahead change in aggregate inflation expectations.
+    \item $\text{Attention}_{t-1}^i$: Google Trends-based consumer attention index for category $i$ at time $t-1$.
+    \item $\Delta \text{PriceChange}_t^i$: First-differenced price change index, capturing unexpected price movements.
+    \item $\Delta \text{Volatility}_t^i$: First-differenced price volatility, representing noise or uncertainty in price signals.
+    \item $\text{Attention}_{t-1}^i \times \Delta \text{PriceChange}_t^i$: Interaction term testing whether attention amplifies the response to price changes.
+    \item $\text{Attention}_{t-1}^i \times \Delta \text{Volatility}_t^i$: Interaction term testing whether attention moderates or reinforces the response to price volatility.
+    \item $\Delta \pi_t^{\text{agg}}$: Aggregate CPI change, capturing overall inflation trends.
+    \item $\Delta Z_{k,t}$: Vector of macroeconomic controls, including consumer sentiment, policy uncertainty, unemployment, real disposable income, and interest rates.
+    \item $\mu_i$: Category fixed effects, capturing time-invariant heterogeneity across goods.
+\end{itemize}
+
+Using lagged attention follows from the idea that consumers allocate attention before forming expectations. This timing assumption reduces concerns about reverse causality and is consistent with models of limited information-processing, where agents update beliefs using the attention allocated in prior periods rather than based on contemporaneous signals. Including aggregate CPI changes ensures that the category-level coefficients are identified relative to the broader inflation environment, rather than capturing shifts driven by general macro trends.\\
+
+This specification features five central coefficients that describe how attention and price signals shape the evolution of inflation expectations. The first term, $\gamma_h$, captures the direct influence of lagged attention. A positive value indicates that heightened attention to a category in the previous period raises the likelihood that households revise their aggregate inflation forecasts upward. This pattern is consistent with theories in which salient information receives disproportionate psychological weight in belief formation. The second coefficient, $\beta_h$, measures the impact of contemporaneous price changes. Its significance shows whether households react directly to recent category-level inflation when updating their expectations. The third coefficient, $\psi_h$, captures the effect of price volatility. A positive estimate would indicate that households treat unstable pricing environments as a sign of inflationary risk or uncertainty. Volatility may therefore operate as a marker of uncertainty, even when average price changes remain small.\\
+
+To examine whether attention conditions the processing of these price signals, we introduce two interaction terms. The coefficient $\eta_h$ on the interaction between lagged attention and price changes tests whether the response to observed inflation becomes stronger when consumers are already focused on a particular category. A significant estimate would indicate that attention transforms a simple price movement into a more influential piece of information. The final term, $\kappa_h$, captures the interaction between attention and price volatility. This term assesses whether attentive consumers respond more strongly to noisy or uncertain price environments, or whether they instead discount such signals because they carry less clear information. Together, these coefficients allow us to determine whether attention acts as a meaningful informational filter in expectation formation.\\
+
+
+\subsection{Baseline Results: Direct and Interaction Effects}
+\subsubsection{Direct Effects of Attention, Price Changes, and Volatility}
+Before turning to the amplification mechanism, we first examine the direct effects of attention, price changes, and price volatility on inflation expectations. This step establishes a baseline information-processing structure. It clarifies how households respond to economic signals even without conditioning on attention, and provides a benchmark for interpreting the interaction terms that follow.\\
+
+Figures~\ref{fig:irf_baseline_att}, \ref{fig:irf_baseline_price}, and \ref{fig:irf_baseline_volatility} report the impulse responses for the three direct channels. The results show a clear and consistent pattern. First, price changes exert a positive and statistically significant effect on inflation expectations across all horizons. Households treat recent price movements as informative and use them to adjust their short-run views about inflation. The response is strongest at short horizons and gradually declines, which is consistent with expectations updating driven by salient, recent signals.\\
+
+Second, attention itself displays only a weak and statistically insignificant direct effect. Higher search intensity for a category does not mechanically translate into higher inflation expectations. This suggests that attention does not act as an independent driver of beliefs, and reinforces the idea that attention mainly serves as a filter through which economic signals gain relevance.\\
+
+Third, price volatility has little systematic influence on expectations. Even when price dispersion rises, households do not revise beliefs in a consistent direction. The absence of a volatility effect is consistent with theories where noisy or ambiguous signals are discounted rather than incorporated into belief formation.\\
+
+Together, these direct effects indicate that expectations respond primarily to price levels, while attention and volatility do not shift beliefs on their own. This provides a natural foundation for evaluating whether attention conditions, rather than drives, the effect of economic signals.\\
+
+\begin{figure}
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/Baseline/baseline att.png}
+\end{center}
+\caption{Impact of Attention on Inflation Expectations}
+\label{fig:irf_baseline_att}
+\end{figure}
+
+\begin{figure}
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/Baseline/baseline price.png}
+\end{center}
+\caption{Impact of Price Change on Inflation Expectations}
+\label{fig:irf_baseline_price}
+\end{figure}
+
+\begin{figure}
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/Baseline/baseline volatility.png}
+\end{center}
+\caption{Impact of Price Volatility on Inflation Expectations}
+\label{fig:irf_baseline_volatility}
+\end{figure}
+
+\subsubsection{Interaction Effects: Attention as a Selective Amplifier}
+Figure~\ref{fig:irf_baseline} presents the interaction terms that allow the responsiveness of expectations to vary with attention. The first interaction term, between attention and price changes, shows a strong and persistent amplification effect. When households pay greater attention to a category, they respond more strongly to its price movements. The effect is positive across horizons and remains statistically meaningful for several months. This pattern suggests that attention converts price observations from passive background information into active inputs in the expectations-formation process.\\
+
+In contrast, the interaction between attention and price volatility shows no comparable amplification. The estimates are small, centred near zero, and lack statistical precision. Even when households devote more attention to a category, they do not adjust expectations based on volatile or ambiguous price signals. This suggests that households filter out noise, focusing instead on clear directional price movements that are easier to interpret. Such selective filtering is consistent with models of limited information processing and the broader literature on salience and sparsity.\\
+
+\begin{figure}
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/Baseline/baseline interaction.png}
+\end{center}
+\caption{Impact of Attention and Price Signals on Inflation Expectations}
+\label{fig:irf_baseline}
+\end{figure}
+
+Viewed as a whole, the results suggest that household expectations are shaped not by prices alone, but by selective attention and cognitive filtering. Attention amplifies salient and interpretable signals, particularly clear price changes, while muting responses to volatility and background noise. This selective mechanism has important implications for understanding the formation of inflation expectations.\\
+
+
+\subsection{Robustness Check: Specification Stability and Model Identification}
+We conduct several robustness checks to assess the stability of the main results. These exercises examine whether the amplification effects hold under alternative specifications, different constructions of key variables, and various sample restrictions. The goal is to verify that the selective role of attention does not depend on a narrow modeling choice. Across the tests, the pattern remains consistent. Attention strengthens the effect of price changes on inflation expectations, while its interaction with price volatility remains weak or insignificant. These findings match the baseline results and support the interpretation that attention amplifies clear price signals but filters out noise. The robustness checks therefore reinforce the credibility of the central mechanism identified in the paper.\\
+
+\subsubsection{Alternative Timing of Attention Variables}
+As a first robustness exercise, we replace lagged attention with contemporaneous attention and re-estimate the baseline model. Figure~\ref{fig:irf_no lag att} reports the resulting impulse responses. The interaction between attention and price changes becomes statistically insignificant at all horizons. The coefficients move around zero and display no stable pattern.\\
+
+This result indicates that inflation expectations do not respond to real-time fluctuations in attention. Instead, expectations appear to reflect attention that was allocated before the price signals arrived. Such timing is consistent with models of limited information processing, where agents collect information gradually and update beliefs with delay. It also matches the rational inattention view that attention must be allocated in advance for signals to influence expectations. Overall, the findings confirm that the amplification mechanism operates through prior attention rather than contemporaneous shifts in search activity.\\
+
+\begin{figure}[H]
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/Robust/rob: no lag att.png}
+\end{center}
+\caption{Impact of Attention and Price Signals on Inflation Expectations: No lag on Attention}
+\label{fig:irf_no lag att}
+\end{figure}
+
+
+\subsubsection{Robustness to Macroeconomic Controls}
+We first examine whether the amplification effects depend on the set of macroeconomic controls included in the baseline specification. To do this, we re-estimate the model while removing all macro variables except the aggregate CPI change. Figure~\ref{fig:irf_no macro} shows that the interaction between attention and price changes becomes weaker and less stable across horizons. This pattern suggests that broader economic conditions influence how households interpret category-level price movements. Then, we assess whether the timing of macroeconomic data affects the results. Since macro indicators often become available with a delay, we construct a lagged version of the macro controls and re-estimate the model. As shown in Figure~\ref{fig:irf_macro lag}, the main findings remain unchanged. Attention continues to strengthen the influence of price changes on inflation expectations.\\
+
+In sum, these exercises confirm that the baseline results are not driven by a specific timing structure or by the inclusion of particular macro controls. Instead, the evidence supports the interpretation that attention operates as a filter, shaping how households process salient price signals within the broader economic environment.\\
+
+\begin{figure}
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/Robust/rob: no macro.png}
+\end{center}
+\caption{Impact of Attention and Price Signals on Inflation Expectations (Macro Controls Removed: Aggregate CPI Kept)}
+\label{fig:irf_no macro}
+\end{figure}
+
+\begin{figure}
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/Robust/rob: macro lag.png}
+\end{center}
+\caption{Impact of Attention × Price Signals on Inflation Expectations (All Macro Controls Variables Lagged)}
+\label{fig:irf_macro lag}
+\end{figure}
+
+
+\subsubsection{Controlling for Time-Specific Shocks}
+We next test whether the amplification effect is sensitive to broad time-specific shocks. To do so, we include time-fixed effects to absorb common disturbances that may influence all categories at the same time. These shocks may arise from macroeconomic announcements, seasonal cycles, or other aggregate events that could bias the results if left uncontrolled.\\
+
+Figure~\ref{fig:irf_time fe} shows that the interaction between attention and price changes remains positive and statistically significant at short horizons. The magnitude declines more quickly than in the baseline model, but the core pattern persists. This indicates that the amplification effect does not stem from period-specific fluctuations. Instead, it reflects a broader behavioral mechanism in which attention shapes how households interpret and react to price movements. The results confirm that the channel we identify is robust to controlling for aggregate time variation.\\
+
+\begin{figure}
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/Robust/rob: time fe.png}
+\end{center}
+\caption{Impact of Attention and Price Signals on Inflation Expectations (Time Fixed Effect)}
+\label{fig:irf_time fe}
+\end{figure}
+
+
+\subsubsection{Controlling for Media Exposure}
+To assess whether media coverage influences our main findings, we include category-specific news volume as an additional control. Figure~\ref{fig:irf_add news} reports the results. The interaction between attention and price changes remains clear and stable across horizons, closely mirroring the baseline estimates. This similarity indicates that the amplification effect does not arise from media-driven salience alone. Instead, it suggests that consumers respond more strongly to price movements they consider personally relevant, even when contemporaneous news coverage is accounted for.
+
+\begin{figure}
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/Robust/rob: add news.png}
+\end{center}
+\caption{Impact of Attention and Price Signals on Inflation Expectations (Controlling for news Volume)}
+\label{fig:irf_add news}
+\end{figure}
+
+
+
+\subsubsection{Excluding Categories with Direct Predictive Power for Inflation Expectations}
+To test whether the amplification effect is driven by a few influential categories, we remove goods whose price changes directly predict aggregate inflation expectations. Table~\ref{tab:granger_price_inflation} shows that Transportation, Energy, and Communication exhibit strong Granger causality with aggregate expectations. We therefore re-estimate the model after excluding these categories.
+
+This exercise evaluates whether attention amplifies price signals in general, or simply strengthens signals from categories that already matter for aggregate inflation. If the effect were driven by these categories alone, excluding them would weaken the interaction term. The results in Figure~\ref{fig:irf_cleaning} show otherwise. The interaction between attention and price changes remains positive and statistically significant, even after removing the three predictive categories. The magnitude is slightly smaller, and the effect fades at longer horizons, but the core pattern persists.
+
+These findings indicate that the amplification mechanism is not mechanical. Attention enhances the interpretation of price signals even in categories that do not directly forecast aggregate inflation. The mechanism therefore reflects a broader information-processing channel, rather than a narrow response to a few highly salient goods.
+
+\begin{table}[H]
+\centering
+\caption{Granger Causality Test: $\Delta$Price Change to $\Delta$Inflation Expectations}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Category} & \textbf{F-statistic} & \textbf{p-value} \\
+\midrule
+Transportation     & 13.10 & 0.000319 \\
+Energy             & 11.10 & 0.000931 \\
+Communication      &  7.35 & 0.00693  \\
+Education          &  1.84 & 0.175    \\
+Personal Care      &  1.59 & 0.207    \\
+Food               &  1.00 & 0.295    \\
+Apparel            &  0.93 & 0.336    \\
+Medical Care       &  0.92 & 0.338    \\
+Tobacco            &  0.58 & 0.447    \\
+Recreation         &  0.05 & 0.820    \\
+Housing            &  0.02 & 0.896    \\
+\bottomrule
+\end{tabular}
+\label{tab:granger_price_inflation}
+\end{table}
+
+\begin{figure}
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/Robust/rob: after cleaning.png}
+\end{center}
+\caption{Impact of Attention and Price Signals on Inflation Expectations (after cleaning)}
+\label{fig:irf_cleaning}
+\end{figure}
+
+
+\subsubsection{Placebo Test: Randomized Attention Assignment}
+As a falsification test, we randomize the assignment of attention series across product categories. This breaks the meaningful link between attention and actual price dynamics while preserving the marginal distributions of both variables. If the amplification effect found in the baseline model is truly driven by attention, this artificial mismatch should remove it.\\
+
+Figure~\ref{fig:irf_placebo_test} supports this expectation. Once attention is randomly reassigned, the interaction terms with price changes and volatility lose all statistical significance. The estimated coefficients fluctuate around zero, display wide confidence intervals, and show no stable pattern across horizons. This absence of structure contrasts sharply with the clear amplification observed in the baseline.\\
+
+The placebo results strengthen the interpretation that the amplification effect requires a meaningful alignment between attention and the underlying price signals. When attention is detached from its natural context, the mechanism disappears. This reinforces the view that attention operates as a directed behavioral channel rather than a statistical artifact.\\
+
+\begin{figure}[H]
+% Use center to align a figure or table to the middle of the text column
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Images/Robust/rob: placebo.png}
+\end{center}
+\caption{Impact of Attention and Price Signals on Inflation Expectations (Placebo test: Randomized Attention)}
+\label{fig:irf_placebo test}
+\end{figure}
+
+We conduct a set of robustness checks to assess whether the amplification effect of attention on inflation expectations is driven by model specification, omitted variable bias, or contemporaneous macroeconomic conditions. Across a range of alternative specifications, the interaction between Attention and Price Change remains stable, positive, and statistically significant, while Attention and Volatility continues to show less meaningful effect. These checks establish the structural credibility of our core result and lay the groundwork for additional placebo and exclusion tests.\\
+
+We conduct several robustness checks to assess the stability of the main results. These exercises examine whether the amplification effects hold under alternative specifications, different constructions of key variables, and various sample restrictions. The goal is to verify that the selective role of attention does not depend on a narrow modeling choice. Across the tests, the pattern remains consistent. Attention strengthens the effect of price changes on inflation expectations, while its interaction with price volatility remains weak or insignificant. These findings match the baseline results and support the interpretation that attention amplifies clear price signals but filters out noise. The robustness checks therefore reinforce the credibility of the central mechanism identified in the paper.\\
+
+
+\subsection{Discussion on Commodity Heterogeneity}
+To study whether attention shapes price sensitivity across different consumption contexts, we classify product categories by the length and stability of their attention cycles. The earlier frequency-domain analysis (Figure~\ref{fft_cluster}) provides the basis for this grouping. Categories with short and stable cycles tend to reflect regular, habit-driven attention. Categories with long and volatile cycles display more irregular and shock-responsive patterns. This classification allows us to examine whether the strength of consumer responses to price signals depends on the underlying structure of attention dynamics.\\
+
+\begin{figure}[htbp]
+  \centering
+
+  \begin{subfigure}[b]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{Images/Robust/rob: hetero pc.png}
+    \caption{Attention and Price Change}
+    \label{fig:irf_pc}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \includegraphics[width=\textwidth]{Images/Robust/rob: hetero vol.png}
+    \caption{Attention and Price Volatility}
+    \label{fig:irf_vol}
+  \end{subfigure}
+
+  \caption{Impulse Responses of Inflation Expectations to Attention-Weighted Price Signals, by Group}
+  \label{fig:irf_by_group}
+\end{figure}
+
+Figure~\ref{fig:irf_by_group} shows clear heterogeneity across these two groups. For price changes, amplification is stronger and more persistent in short-cycle categories. The responses are statistically precise and remain positive across horizons. These patterns suggest that frequent and predictable attention creates a stable channel through which consumers integrate price movements into their inflation expectations. In long-cycle categories, the amplification effect is weaker and less stable. Some short-run responses appear, but they fade quickly and in several horizons even move toward zero. This indicates that irregular attention may create temporary reactions without supporting sustained expectation adjustment.\\
+
+The results for price volatility are muted for both groups. In short-cycle categories, attention has no systematic influence on how consumers interpret volatile price movements. In long-cycle categories, the interaction term is small and tends to drift negative, but the estimates remain statistically indistinguishable from zero. This suggests that intermittent attention to uncertain price signals is not strong enough to alter inflation expectations in a meaningful way. The weak and unstable responses imply that attention under uncertainty is too sporadic, or too noisy, to operate as a reliable information filter.\\
+
+
+\section{Household Attention Responds to Economic Signals}
+While earlier sections treat household attention as a lagged and predetermined input in the formation of inflation expectations, this section examines whether attention itself responds to observable economic signals. This reframes the analysis from a purely rational inattention perspective—where attention is allocated in advance under cognitive constraints—to the possibility of endogenous behavioral adjustments. The conventional view treats attention as independent of contemporaneous conditions. To deepen the understanding of expectation formation, we now ask what drives the allocation of household attention in the first place.\\
+
+We study this question using panel fixed-effects regressions based on monthly data across the 11 consumption categories. The dependent variable is the first difference in category-level attention indices from Google Trends. Explanatory variables include price changes, price volatility, news coverage, and a set of macroeconomic indicators. All specifications include category fixed effects to absorb time-invariant heterogeneity, and Standard errors are clustered at the category level to correct for serial correlation and heteroskedasticity within groups. This empirical design isolates within-category variation and allows us to examine how attention responds to short-run economic developments.\\
+
+The estimates show that attention reacts strongly to both price changes and price volatility. The coefficients on these two variables are positive and statistically significant, indicating that consumers shift more attention toward categories experiencing active or uncertain pricing environments. By contrast, macroeconomic indicators such as unemployment, EPU, and aggregate CPI have little explanatory power, and news volume does not exhibit a consistent effect. When we include aggregate inflation expectations, both contemporaneous and lagged versions are positively associated with attention. This suggests that households adjust their focus not only in response to local price signals but also in line with broader economic beliefs.\\
+
+Overall, the evidence points to an interpretation of household attention as an adaptive behavioral response. Attention is not randomly assigned nor fixed over time. Instead, it moves with salient price developments and macroeconomic expectations, operating as a selective information-processing mechanism. This dynamic behavior highlights the potential for feedback between attention and expectations and illustrates how attention may influence consumer perceptions and decision-making.\\
+
+Therefore, we estimate the following model:
+
+\begin{equation}
+\Delta \text{Attention}_{i,t} = \alpha_i + \beta_1 \cdot \Delta \text{Price}_{i,t} + \beta_2 \cdot \Delta \text{Volatility}_{i,t} + \beta_3 \cdot \Delta \text{News}_{i,t} + \gamma \cdot \text{Macro}_{t-1} + \varepsilon_{i,t}
+\end{equation}
+
+
+\noindent
+Where $\Delta \text{Attention}_{i,t}$ is the first-differenced attention index for category $i$ at time $t$, and $\alpha_i$ captures category fixed effects. Macro variables includes EPU, consumer sentiment, unemployment rate, aggregate CPI, real disposable income (RDI), and mortgage rate.
+
+To evaluate the potential role of inflation expectations, we extend the baseline model by adding both contemporaneous and lagged changes in inflation expectations, yielding Equations (2) and (3) respectively.
+
+\begin{table}[H]
+\centering
+\caption{Panel Regression Results – Determinants of Household Attention}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lccc}
+\toprule
+\textbf{Variable} & \textbf{(1) Baseline} & \textbf{(2) + Inflation Exp} & \textbf{(3) + Lagged Inflation Exp} \\
+\midrule
+D\_InflationExp         &                     & 0.3846 (0.1989)$^{\dagger}$ & \\
+L1\_D\_InflationExp     &                     &                              & 0.3909 (0.1519)$^{*}$ \\
+D\_PriceChange          & 0.0875 (0.0428)$^{*}$ & 0.0870 (0.0432)$^{*}$ & 0.0794 (0.0419)$^{*}$ \\
+D\_Volatility           & 0.0937 (0.0410)$^{*}$ & 0.0937 (0.0420)$^{*}$ & 0.0922 (0.0406)$^{*}$ \\
+Diff\_News              & --0.0010 (0.0016)  & --0.0010 (0.0016)         & --0.0013 (0.0020)       \\
+D\_EPU                  & --0.0022 (0.0023)  & --0.0022 (0.0023)         & --0.0014 (0.0022)       \\
+D\_ConsumerSent         & 0.0192 (0.0136)     & 0.0286 (0.0160)$^{\dagger}$ & 0.0238 (0.0153)         \\
+D\_Unemployment         & --0.2538 (0.2064)  & --0.2439 (0.2024)         & --0.2321 (0.2041)       \\
+D\_CpiAgg               & 0.1738 (0.1600)     & 0.0908 (0.1317)           & 0.1611 (0.1590)         \\
+D\_RDI                  & --0.0003 (0.0002)  & --0.0002 (0.0003)         & --0.0003 (0.0002)       \\
+D\_Mortgage             & --0.3602 (0.3140)  & --0.4305 (0.3389)         & --0.4380 (0.3249)       \\
+\midrule
+Category FE           & Yes               & Yes                       & Yes                     \\
+Clustered SE (by Category) & Yes               & Yes                       & Yes                     \\
+\bottomrule
+\end{tabular}
+}
+\vspace{0.5em}
+
+\label{tab:attention_panel}
+
+\begin{minipage}{\textwidth}
+\footnotesize
+\raggedright
+\textit{Notes}: Standard errors in parentheses. $^{\dagger} p<0.10$, $^{*} p<0.05$, $^{**} p<0.01$.\\
+The dependent variable is the first-differenced Attention Index by product category and month. Column (1) estimates the baseline model as in Equation (1). Column (2) adds contemporaneous changes in inflation expectations. Column (3) includes a one-month lag of inflation expectations.
+\end{minipage}
+\end{table}
+
+
+\section{Conclusion}
+This paper examines how households allocate attention and how these patterns shape the formation of inflation expectations. Using Google Trends as a behavioral measure, we document clear cyclical dynamics in attention across consumption categories. These cycles display meaningful differences in length and volatility, pointing to distinct behavioral patterns in how consumers monitor different types of goods.\\
+
+Building on this structure, we show that attention plays an active role in expectation formation. When attention is high, consumers respond more strongly to price changes, and the amplification is most pronounced in categories with short and stable attention cycles. In contrast, attention to categories with irregular or volatile cycles contributes little to the interpretation of price signals. The results indicate that households treat clear and interpretable price movements as informative, while discounting noisy or uncertain changes. This selective response is consistent with theories of limited attention and salience-based processing.\\
+
+The analysis also shows that household attention is not predetermined. Attention increases in response to active or uncertain price movements and rises when inflation expectations are higher. These findings suggest that attention adjusts to economic conditions rather than remaining fixed, and functions as a behavioral filter through which consumers interpret new information. This dynamic pattern highlights a potential feedback mechanism between attention and expectations.\\
+
+Overall, these results characterize household attention as a structured and behaviorally meaningful feature of economic decision-making. The evidence provides new insight into how consumers process information and how specific price signals enter inflation expectations. The findings also offer broader implications for macroeconomic models that incorporate informational frictions, and highlight the value of using real-time behavioral data to study expectation formation.\\
+
+
+\end{document}
 
