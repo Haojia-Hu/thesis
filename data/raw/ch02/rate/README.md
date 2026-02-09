@@ -26,9 +26,9 @@ Notes
 This folder also documents the raw Freddie Mac Primary Mortgage Market Survey (PMMS) data used in Chapter 2 to obtain the national 30-year fixed-rate mortgage series (weekly), which is aggregated to monthly averages and merged with the HMDA-based MSA-month panel to compute the monthly mortgage rate gap.
 
 ## Source
-Freddie Mac PMMS:
+- Freddie Mac PMMS:
 https://www.freddiemac.com/pmms
-File type：
+- File type：
 Weekly PMMS historical data workbook (Excel)
 
 Expected raw filename (not committed to Git)
