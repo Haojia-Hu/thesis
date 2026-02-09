@@ -21,7 +21,7 @@ suppressPackageStartupMessages({
 
 # ---- Paths ----
 input_file <- here(
-  "data", "transformed", "ch02", "hmda", "hmda_30y_clean.csv"
+  "data", "transformed", "ch02", "rate_gap", "hmda_30y_clean.csv"
 )
 
 output_dir <- here(
