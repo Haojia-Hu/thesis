@@ -7,10 +7,10 @@
 #     2) applying standard amortization schedules, and
 #     3) incorporating exponential decay to approximate prepayment.
 #
-# Inputs (generated, not version controlled)
+# Inputs 
 #   data/transformed/ch02/hmda/hmda_30y_clean.csv
 #
-# Outputs (generated, not version controlled)
+# Outputs 
 #   data/transformed/ch02/rate_gap/msa_outstanding_rate_monthly.csv
 # =============================================================================
 
