@@ -22,7 +22,7 @@
 #     data/transformed/ch02/rate_gap/rate_gap_monthly.csv
 #
 #   Output figures:
-#     data/output/ch02/figures/fig_rate_gap_national_monthly.pdf
+#     data/output/ch02/rate_gap_fig/fig_rate_gap_national_monthly.pdf
 # =============================================================================
 
 suppressPackageStartupMessages({
