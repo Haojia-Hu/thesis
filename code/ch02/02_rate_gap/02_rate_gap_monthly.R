@@ -36,7 +36,7 @@ suppressPackageStartupMessages({
 # ---- Paths ----
 hmda_panel_file <- here("data", "transformed", "ch02", "rate_gap",
                         "msa_outstanding_rate_monthly.csv")
-pmms_file <- here("data", "raw", "ch02", "pmms", "historicalweeklydata.xlsx")
+pmms_file <- here("data", "raw", "ch02", "rate", "historicalweeklydata.xlsx")
 
 out_trans_dir <- here("data", "transformed", "ch02", "rate_gap")
 out_fig_dir   <- here("data", "output", "ch02", "figures")
