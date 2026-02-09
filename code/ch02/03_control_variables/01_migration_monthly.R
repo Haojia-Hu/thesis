@@ -23,9 +23,9 @@ suppressPackageStartupMessages({
 })
 
 # ---- Paths ----
-in_file <- here("data", "raw", "ch02", "cbsa_population", "cbsa_population_18_24.xlsx")
+in_file <- here("data", "raw", "ch02", "control_variables", "cbsa_population_18_24.xlsx")
 
-out_dir  <- here("data", "transformed", "ch02", "controls")
+out_dir  <- here("data", "transformed", "ch02", "control_variables")
 out_file <- file.path(out_dir, "cbsa_migration_monthly.csv")
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
