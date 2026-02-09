@@ -1,4 +1,4 @@
-HMDA Data (Mortgage rate)
+# HMDA Data (Mortgage rate)
 
 This directory contains intermediate datasets generated from raw inputs for Chapter 2.
 All outputs are reproducible using scripts in `code/ch02/01_hmda`.
