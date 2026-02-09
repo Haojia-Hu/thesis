@@ -1,5 +1,8 @@
 # CBSA Population Data 
 
+This folder documents the raw CBSA-level population data used as a control variable
+in Chapter 2.
+
 ## Source
 
 CBSA population data are obtained from the **U.S. Census Bureau’s Population Estimates Program (PEP)**,
@@ -41,3 +44,7 @@ The merged raw population data are stored as:
 - Raw population data report **total population levels**, not migration flows.
 - Raw datasets are never modified.
 - Large raw files should not be committed to GitHub.
+
+---
+
+
