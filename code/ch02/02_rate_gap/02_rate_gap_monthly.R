@@ -6,7 +6,7 @@
 #         rate_gap_{m,t} = pmms_30y_t - weighted_rate_{m,t}.
 #   3) Produce a national monthly average rate gap figure.
 #
-# Inputs (generated / raw; not version controlled)
+# Inputs 
 #   Generated input (HMDA-based panel):
 #     data/transformed/ch02/rate_gap/msa_outstanding_rate_monthly.csv
 #     Expected columns: eval_year, eval_month, derived_msa_md, weighted_rate
@@ -16,7 +16,7 @@
 #     data/raw/ch02/pmms/historicalweeklydata.xlsx
 #     (Reads Week and FRM30 columns; weekly window 2018-01-04 to 2024-12-26)
 #
-# Outputs (generated; not version controlled)
+# Outputs 
 #   Transformed:
 #     data/transformed/ch02/rate_gap/pmms_30y_monthly.csv
 #     data/transformed/ch02/rate_gap/rate_gap_monthly.csv
