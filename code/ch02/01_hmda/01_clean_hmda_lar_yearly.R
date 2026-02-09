@@ -14,7 +14,7 @@
 #   Years used in this project: 2018–2024
 #
 # Outputs (generated, NOT version controlled)
-#   data/transformed/ch02/01_hmda_clean/hmda_clean_{YEAR}.csv
+#   data/transformed/ch02/01_hmda_clean/{YEAR}_hmda_clean.csv
 # =============================================================================
 
 suppressPackageStartupMessages({
