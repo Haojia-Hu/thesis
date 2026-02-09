@@ -27,9 +27,8 @@ This folder also documents the raw Freddie Mac Primary Mortgage Market Survey (P
 
 ## Source
 Freddie Mac PMMS:
-```text
 https://www.freddiemac.com/pmms
-File type
+File type：
 Weekly PMMS historical data workbook (Excel)
 
 Expected raw filename (not committed to Git)
