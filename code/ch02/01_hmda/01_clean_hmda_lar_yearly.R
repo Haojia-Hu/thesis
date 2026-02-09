@@ -10,7 +10,7 @@
 #   - fixed-rate style loans (intro_rate_period == 0 or NA)
 #
 # Inputs (NOT version controlled)
-#   data/raw/ch02/hmda_lar/{YEAR}_public_lar_csv.csv
+#   data/raw/ch02/rate/{YEAR}_public_lar_csv.csv
 #   Years used in this project: 2018–2024
 #
 # Outputs (generated, NOT version controlled)
@@ -24,8 +24,8 @@ suppressPackageStartupMessages({
 })
 
 # ---- Paths (repo-relative) ----
-raw_dir   <- here("data", "raw", "ch02", "hmda_lar")
-clean_dir <- here("data", "transformed", "ch02", "hmda_clean")
+raw_dir   <- here("data", "raw", "ch02", "rate")
+clean_dir <- here("data", "transformed", "ch02", "rate_gap")
 
 dir.create(clean_dir, recursive = TRUE, showWarnings = FALSE)
 
