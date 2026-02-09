@@ -1,11 +1,11 @@
-# HMDA Public LAR (raw, not version controlled)
+# Home Mortgage Disclosure Act (HMDA) Data
 
 This folder documents the raw HMDA public Loan/Application Records (LAR) data used in Chapter 2.
 
 ## Source
 HMDA Snapshot: National Loan-Level Dataset (FFIEC/CFPB). Download yearly "Loan/Application Records (LAR)" files.
 
-- File type: Loan/Application Records (LAR) (public CSV), downloaded by year: https://ffiec.cfpb.gov/data-publication/snapshot-national-loan-level-dataset/2024
+- File type: Loan/Application Records (LAR) (public CSV), downloaded by year from HMDA offical website: https://ffiec.cfpb.gov/data-publication/snapshot-national-loan-level-dataset/2024
 - Coverage used in this project Years: 2018–2024
 
 Expected raw filenames (not committed to Git)
