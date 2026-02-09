@@ -32,14 +32,11 @@ https://www.freddiemac.com/pmms
 Weekly PMMS historical data workbook (Excel)
 
 Expected raw filename (not committed to Git)
-Place the PMMS workbook here using the naming convention:
-
-historicalweeklydata.xlsx
+Place the PMMS workbook here using the naming convention: historicalweeklydata.xlsx
 
 Coverage used in this project
-Weekly window used for monthly aggregation: 2018-01-04 to 2024-12-26 (inclusive)
+- Weekly window used for monthly aggregation: 2018-01-04 to 2024-12-26 (inclusive)
 
 Notes
-Raw datasets are never modified.
-
-Large raw files should not be committed to GitHub.
+- Raw datasets are never modified.
+- Large raw files should not be committed to GitHub.
