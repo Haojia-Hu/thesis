@@ -25,7 +25,7 @@ suppressPackageStartupMessages({
 
 # ---- Paths (repo-relative) ----
 raw_dir   <- here("data", "raw", "ch02", "hmda_lar")
-clean_dir <- here("data", "transformed", "ch02", "01_hmda_clean")
+clean_dir <- here("data", "transformed", "ch02", "hmda_clean")
 
 dir.create(clean_dir, recursive = TRUE, showWarnings = FALSE)
 
