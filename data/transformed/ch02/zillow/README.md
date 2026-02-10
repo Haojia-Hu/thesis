@@ -1,112 +1,78 @@
-# Zillow Crosswalk
+# Zillow Housing-Market Outcomes (Transformed)
 
-This folder contains analysis-ready Zillow crosswalk outputs used to align Zillow housing-market
-series with CBSA-level panels in Chapter 2.
+This folder contains CBSA-by-month Zillow outcomes used in Chapter 2 regressions.
 
-All files in this folder are reproducible using:
-- `code/ch02/zillow/01_build_zillow_crosswalk.R`
+All outputs are reproducible using scripts in:
+- `code/ch02/zillow/`
 
 Key identifiers:
-- `RegionID` (Zillow metro/region identifier)
-- `cbsa_code` (5-digit CBSA code)
+- `cbsa_code` : 5-digit CBSA code (string, padded with leading zeros)
+- `yearmon`   : month in "YYYY-MM"
 
 ---
 
-## zillow_crosswalk.csv
+## 1) Crosswalk
+
+### zillow_crosswalk.csv
 
 **Purpose**  
-Provide a clean one-to-one mapping between Zillow `RegionID` and official 5-digit `cbsa_code`
-to support merges between Zillow outcomes and CBSA-by-month datasets.
+Clean and standardize the mapping between Zillow metro `RegionID` and official `cbsa_code`.
 
-**Input (raw)**  
+**Input (raw)**
 - `data/raw/ch02/zillow/Raw_zillow_MSA_crosswalk.xlsx`
 
-**Output (transformed)**  
-- `zillow_crosswalk.csv` (stored in this folder)
+**Output (transformed)**
+- `zillow_crosswalk.csv`
 
-**Columns**
-- `RegionID`
-- `cbsa_code`
-
-**Cleaning rules**
-- Drop empty columns and rows.
-- Keep only `RegionID` and `cbsa_code`.
-- Trim whitespace and remove non-alphanumeric "dirty" characters.
-- Enforce unique `RegionID` by keeping the first observed mapping if duplicates exist.
+Built by:
+- `code/ch02/zillow/01_build_zillow_crosswalk.R`
 
 ---
+
+## 2) CBSA-by-month outcomes (separate files; no merged panel)
+
+Each file below is constructed by:
+1) reading a Zillow metro-wide table (RegionID × date columns),
+2) reshaping to long format,
+3) mapping `RegionID -> cbsa_code` using `zillow_crosswalk.csv`,
+4) aggregating to CBSA-by-month.
+
+Built by:
+- `code/ch02/zillow/02_build_zillow_proxies.R`
+
+### Outputs
+
+- `zillow_invt.csv`  
+  Columns: `cbsa_code`, `yearmon`, `proxy_value`  
+  For-sale inventory (stock measure).
+
+- `zillow_newlisting.csv`  
+  Columns: `cbsa_code`, `yearmon`, `proxy_value`  
+  New listings (flow measure).
+
+- `zillow_newlypending.csv`  
+  Columns: `cbsa_code`, `yearmon`, `proxy_value`  
+  Newly pending listings (pending-sales proxy).
+
+- `zillow_daytopending.csv`  
+  Columns: `cbsa_code`, `yearmon`, `proxy_value`  
+  Mean days to pending (days).
+
+- `zillow_sharepricecut.csv`  
+  Columns: `cbsa_code`, `yearmon`, `proxy_value`  
+  Share of listings with a price cut (percent/share).
+
+- `zillow_zhvi.csv`  
+  Columns: `cbsa_code`, `yearmon`, `proxy_value`  
+  ZHVI (middle tier; smoothed & seasonally adjusted).
+
+**Time coverage**
+- Scripts extract months within 2018–2024 when available in the raw Zillow files.
+- Downstream analyses typically use the balanced intersection with RateGap/IV/controls.
 
 ## Notes
 
-- This transformed crosswalk is upstream of any Zillow outcome panel construction.
-- `cbsa_code` is stored as a 5-character string with leading zeros if needed.
-
----
-
-# Zillow Outcomes (Transformed/Proxies)
-
-This folder contains analysis-ready CBSA-by-month Zillow outcomes for Chapter 2.
-All outputs are reproducible using scripts in `code/ch02/zillow/`.
-
-Key identifiers:
-- `cbsa_code`: 5-digit CBSA (string with leading zeros)
-- `ym`: month in "YYYY-MM" format
-
----
-
-## 1) zillow_crosswalk.csv
-
-**Purpose**  
-Map Zillow metro/region identifiers (`RegionID`) to official CBSA codes.
-
-**Input (raw)**  
-- `data/raw/ch02/zillow/Raw_zillow_MSA_crosswalk.xlsx` (downloaded from darrenaiello.com/data)
-
-**Output**  
-- `zillow_crosswalk.csv`
-
-**Columns**
-- `RegionID`
-- `cbsa_code` (5-digit)
-
-Built by:
-- `code/ch02/zillow/01_build_zillow_crosswalk.R`
-
----
-
-## 2) CBSA-by-month outcomes (lock-in proxies + prices)
-
-These files convert Zillow metro-wide tables into long panels, map `RegionID -> cbsa_code`,
-then aggregate to CBSA-by-month.
-
-Built by:
-- `code/ch02/zillow/02_build_zillow_cbsa_monthly.R`
-
-### Outputs (CBSA-by-month)
-
-- `zillow_invt_cbsa_monthly.csv`  
-  For-sale inventory (units): count of unique active listings in the month.
-
-- `zillow_new_listings_cbsa_monthly.csv`  
-  New listings (units): listings newly coming onto the market during the month.
-
-- `zillow_pending_sales_cbsa_monthly.csv`  
-  Newly pending listings (units): listings switching from for-sale to pending during the month.
-
-- `zillow_days_to_pending_cbsa_monthly.csv`  
-  Mean days to pending (days): time from first being listed to pending status.
-
-- `zillow_price_cut_share_cbsa_monthly.csv`  
-  Share of listings with a price cut (percent/share).
-
-- `zillow_zhvi_cbsa_monthly.csv`  
-  ZHVI (USD): typical home value, middle tier (smoothed & seasonally adjusted).
-
-**Common columns**
-- `cbsa_code`
-- `ym`
-- `value`
-
-**Time coverage**
-- Script extracts 2018-01 to 2024-12 from raw files (when available), then downstream analyses
-  typically use the balanced intersection with RateGap/IV/controls (often 2018-08 to 2024-07).
+- File names and schemas are kept consistent with the original exploratory code to minimize
+  downstream refactoring.
+- These outcomes are later merged (as needed) in the housing-quant estimation scripts by joining on
+  (`cbsa_code`, `yearmon`).
