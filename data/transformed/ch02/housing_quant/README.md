@@ -39,7 +39,7 @@ with CBSA and month fixed effects, and standard errors clustered by CBSA.
 - `rategap_resid` : first-stage residual (diagnostic)
 
 **Time coverage**
-- **January 2018 – December 2024** (monthly)
+- **August 2018 – July 2024** (monthly)
 
 ---
 
@@ -55,9 +55,7 @@ in downstream IV specifications (e.g., 2SLS outcome regressions and LP-IV).
 - `rategap_hat`
 
 **Time coverage**
-- **January 2018 – December 2024** (monthly)
-
----
+- **August 2018 – July 2024** (monthly)
 
 ## Notes
 
