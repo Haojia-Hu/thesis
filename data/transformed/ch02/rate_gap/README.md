@@ -23,7 +23,7 @@ the shift-share (Bartik) instrumental variable for Chapter 2, including:
   Monthly average PMMS 30-year fixed-rate mortgage series
 - `rate_gap_monthly.csv`  
   CBSA-by-month mortgage rate gap (`pmms_30y - weighted_rate`)
-- `ss_iv.csv`  
+- `SS_IV.csv`  
   Shift-share (Bartik) IV panel containing:
   - `Exposure` (CBSA-level exposure index constructed from HMDA rate-bin shares)
   - `NatShock_level` (national shock: residual from regressing PMMS on GS10)
