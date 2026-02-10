@@ -1,5 +1,4 @@
 # rate_gap
-*(generated, not version controlled)*
 
 ## Description
 Intermediate datasets used to construct the monthly mortgage rate gap and
@@ -35,4 +34,4 @@ the shift-share (Bartik) instrumental variable for Chapter 2, including:
 - **2018–2024 (monthly)**
 
 ## Notes
-- The Instrument variable related explanation also been showed with details in a separate files (**data/transformed/ch02/iv/README.md**)
+- The Instrument variable (SS_IV) related explanation also been showed with details in a separate files (**data/transformed/ch02/iv/README.md**)
