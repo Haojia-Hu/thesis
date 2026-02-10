@@ -17,7 +17,7 @@ the shift-share (Bartik) instrumental variable for Chapter 2, including:
 - **Shift-share IV construction (NatShock × Exposure):**  
   `code/ch02/02_rate_gap/03_build_shiftshare_iv.R`
 
-## Output files (not version controlled)
+## Output files 
 - `msa_outstanding_rate_monthly.csv`  
   CBSA-by-month outstanding-weighted mortgage rates constructed from HMDA 30Y loans
 - `pmms_30y_monthly.csv`  
@@ -33,3 +33,6 @@ the shift-share (Bartik) instrumental variable for Chapter 2, including:
 
 ## Time coverage
 - **2018–2024 (monthly)**
+
+## Notes
+- The Instrument variable related explanation also been showed with details in a separate files (**data/transformed/ch02/iv/README.md**)
