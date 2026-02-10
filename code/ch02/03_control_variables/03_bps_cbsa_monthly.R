@@ -1,5 +1,4 @@
 # ============================================================
-# Chapter 2 - Control Variables
 # BPS (Building Permits Survey): CBSA-by-month total permits
 #
 # Raw inputs (NOT committed):
