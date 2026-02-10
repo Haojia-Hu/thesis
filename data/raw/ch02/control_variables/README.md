@@ -111,3 +111,42 @@ These files are downloaded directly from the BLS website and are **not committed
 - Raw LAUS files are never modified.
 - All transformations and variable construction are performed in reproducible scripts
   located in the `code/ch02/` directory.
+
+  ---
+
+  # CBSA Building Permits Data (BPS)
+
+This section documents the raw CBSA-level building permits data used as a local
+housing supply / construction activity control variable in Chapter 2.
+
+## Source
+
+Building permits data are obtained from the **U.S. Census Bureau’s Building Permits Survey (BPS)**.
+The BPS provides monthly permit counts for geographic areas including CBSAs (MSAs).
+
+## Coverage and formats
+
+To cover the full Chapter 2 study period, CBSA-level monthly permits are compiled from
+two raw formats provided by the Census Bureau:
+
+- **TXT tables (early period)**: `tb3uYYYYMM.txt` (CBSA table)
+- **Excel tables (later period)**: `msamonthly_YYYYMM.xls` / `msamonthly_YYYYMM.xlsx`
+
+The unified panel targets **January 2018 – December 2024** at monthly frequency.
+
+## Raw files (not committed to Git)
+
+Place raw inputs under:
+
+- `data/raw/ch02/control_variables/bps/txt/`:
+  - `tb3u201801.txt`, `tb3u201802.txt`, ... (one file per month)
+
+- `data/raw/ch02/control_variables/bps/excel/`:
+  - `msamonthly_201911.xls`, `msamonthly_201912.xls`, ... (one file per month)
+
+Raw datasets are never modified and should not be committed to GitHub.
+
+## Notes
+
+- The series used is **Total permits** for each CBSA-month.
+- CBSA identifiers are standardized as official **5-digit CBSA codes** to match HMDA and other CBSA-level controls.
