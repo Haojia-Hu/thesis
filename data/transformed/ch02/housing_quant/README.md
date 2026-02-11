@@ -61,7 +61,7 @@ in downstream IV specifications (e.g., 2SLS outcome regressions and LP-IV).
 
 - These outputs are upstream of the final outcome panel that merges Zillow housing-market
   indicators. They are designed to merge cleanly on (`cbsa_code`, `ym`).
-- The first-stage residual is included in `Panel_rategap_hat.csv` for diagnostics and robustness checks.
+- The first-stage residual is included in **`panel_rategap_hat.csv`** for diagnostics and robustness checks.
 
 ---
 
@@ -79,7 +79,7 @@ and month fixed effects.
 ### Inputs
 
 1) **Rate gap panel with Bartik instrument (CBSA-by-month)**  
-- `thesis/data/transformed/ch02/rate_gap/Panel_rategap_hat.csv`  
+- `thesis/data/transformed/ch02/rate_gap/panel_rategap_hat.csv`  
   Required columns: `cbsa_code`, `ym`, `rate_gap`, `Z_bartik`.
 
 2) **Zillow new listings proxy (CBSA-by-month)**  
