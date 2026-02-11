@@ -1,4 +1,4 @@
-# Output — Chapter 2 (Housing Price 2SLS)
+# Housing Price 2SLS
 
 This folder contains regression outputs for the Chapter 2 house price analysis using 2SLS.
 
