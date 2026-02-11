@@ -71,7 +71,7 @@ distribution is classified as **HighLockedIn**.
 
 **Inputs**  
 - Baseline exposure (for HighLockedIn definition):  
-  `data/transformed/ch02/rate_gap/MSA_outstanding_weighted_rate_monthly.csv`
+  `data/transformed/ch02/rate_gap/msa_outstanding_weighted_rate_monthly.csv`
 - Zillow CBSA-by-month proxies (constructed earlier):  
   `data/transformed/ch02/zillow/zillow_newlisting.csv`  
   `data/transformed/ch02/zillow/zillow_invt.csv`  
