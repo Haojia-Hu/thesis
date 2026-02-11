@@ -65,3 +65,37 @@ in downstream IV specifications (e.g., 2SLS outcome regressions and LP-IV).
 
 ---
 
+## LP-IV: Dynamic Response of New Listings to Mortgage Rate Gap
+
+**Purpose**  
+Estimate local-projection IV (LP-IV) impulse responses of Zillow new listings to
+a mortgage rate gap shock. For each horizon \(h=1,\dots,12\), the regression relates
+future new listings to the instrumented rate gap at time \(t\), controlling for CBSA
+and month fixed effects.
+
+**Script**  
+- `thesis/code/ch02/06_housing_quant/04_lp_iv_new_listings.R`
+
+### Inputs
+
+1) **Rate gap panel with Bartik instrument (CBSA-by-month)**  
+- `thesis/data/transformed/ch02/rate_gap/Panel_rategap_hat.csv`  
+  Required columns: `cbsa_code`, `ym`, `rate_gap`, `Z_bartik`.
+
+2) **Zillow new listings proxy (CBSA-by-month)**  
+- `thesis/data/transformed/ch02/zillow/zillow_newlisting.csv`  
+  Required columns: `cbsa_code`, `yearmon`, `proxy_value`.
+
+### Outputs
+
+- `thesis/data/output/ch02/housing_quant/lp_iv_new_listings_irf.csv`  
+  Contains `horizon`, `beta`, `se`, `N`, and 95% CI bounds for each horizon.
+
+- `thesis/data/output/ch02/housing_quant/lp_iv_new_listings_irf.png`  
+  IRF plot with 95% confidence bands.
+
+### Notes
+- Each horizon regression includes CBSA and month fixed effects.
+- Standard errors are clustered at the CBSA level.
+- Horizons use forward leads of the new listings series within each CBSA.
+- 
