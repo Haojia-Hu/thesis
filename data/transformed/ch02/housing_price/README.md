@@ -62,7 +62,7 @@ What it contains:
   - inv_elast: inverse elasticity (1 / elasticity), frequently used to classify “more constrained” vs “more elastic” areas
 
 How it is generated:
-- code/ch02/07_housing_price/00_build_saiz2010_cbsa.R
+- code/ch02/07_housing_price/03_build_saiz2010_cbsa.R
 
 Raw inputs used:
 - data/raw/ch02/saiz2010/saiz2010.csv
