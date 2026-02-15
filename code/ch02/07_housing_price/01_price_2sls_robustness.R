@@ -1,12 +1,8 @@
 # ==============================================================================
-# Chapter 2 — Housing Price (2SLS) + Robustness Checks
-#
-# Purpose
-# -------
-# Estimate 2SLS models of CBSA-level monthly house price growth on the local
-# mortgage rate gap (RateGap). The endogenous regressor is `rate_gap`, instrumented
-# by `Z_bartik`. All specifications include CBSA fixed effects and month fixed
-# effects, with standard errors clustered at the CBSA level.
+# Purpose: Estimate 2SLS models of CBSA-level monthly house price growth on the local
+#          mortgage rate gap (RateGap). The endogenous regressor is `rate_gap`, instrumented
+#          by `Z_bartik`. All specifications include CBSA fixed effects and month fixed
+#          effects, with standard errors clustered at the CBSA level.
 #
 # This script implements:
 #   1) Baseline 2SLS
@@ -15,8 +11,7 @@
 #   4) High-gap vs Low-gap subsamples (split at median of rate_gap)
 #   5) COVID vs Hike-period subsamples (as in your code cutoffs)
 #
-# Inputs (from thesis/data/transformed/ch02)
-# -----------------------------------------
+# Inputs (data/transformed/ch02):
 # 1) Zillow ZHVI (CBSA-month)
 #   data/transformed/ch02/zillow/zillow_zhvi.csv
 #   Required columns: cbsa_code, yearmon, proxy_value
@@ -30,8 +25,7 @@
 #   data/transformed/ch02/zillow/zillow_newlisting.csv
 #   Required columns: cbsa_code, yearmon, proxy_value
 #
-# Outputs (to thesis/data/output/ch02/housing_price)
-# -------------------------------------------------
+# Outputs (data/output/ch02/housing_price):
 # 1) housing_price_2sls_baseline_and_robustness.csv
 #   Tidy summary table for all models
 #
