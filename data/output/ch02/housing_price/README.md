@@ -2,7 +2,7 @@
 
 This folder contains regression outputs for the Chapter 2 house price analysis using 2SLS.
 
-## What this module does
+## The module purpose
 We estimate 2SLS models of CBSA-level monthly house price growth on the local mortgage rate gap.
 The endogenous regressor is `rate_gap`, instrumented by `Z_bartik`. All specifications include
 CBSA fixed effects and month fixed effects, with standard errors clustered at the CBSA level.
