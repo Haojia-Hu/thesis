@@ -1,4 +1,4 @@
-Price Heterogeneity related Data
+# Price Heterogeneity related Data
 
 This folder contains raw external datasets used for heterogeneity analysis
 in the Chapter 2 housing price module.
@@ -7,7 +7,7 @@ These data are NOT modified and should remain identical to the original
 downloaded files from official sources.
 
 ---
-1) BLS QCEW – County-Level Employment
+## 1) BLS QCEW – County-Level Employment
 
 Source:
 U.S. Bureau of Labor Statistics (BLS)
@@ -40,7 +40,7 @@ These data are later aggregated from County → CBSA level
 using Census crosswalk files.
 
 --- 
-2) Census County-to-CBSA Crosswalk (List 1)
+## 2) Census County-to-CBSA Crosswalk (List 1)
 
 Source:
 U.S. Census Bureau
@@ -60,7 +60,7 @@ Used to aggregate county-level QCEW employment data
 into CBSA-level monthly employment totals.
 
 --- 
-3) Saiz (2010) Housing Supply Elasticity
+## 3) Saiz (2010) Housing Supply Elasticity
 
 Source:
 Saiz, Albert (2010)
@@ -76,7 +76,7 @@ Original geographic identifier:
     msanecma (1999 MSA code)
 
 --- 
-4) MSA-to-CBSA Crosswalk (1999 → 2003)
+## 4) MSA-to-CBSA Crosswalk (1999 → 2003)
 
 Source:
 U.S. Census Bureau
