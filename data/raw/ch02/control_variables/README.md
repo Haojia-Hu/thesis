@@ -112,17 +112,20 @@ These files are downloaded directly from the BLS website and are **not committed
 - All transformations and variable construction are performed in reproducible scripts
   located in the `code/ch02/` directory.
 
-  ---
+---
 
-  # CBSA Building Permits Data (BPS)
+# CBSA Building Permits Data (BPS)
 
 This section documents the raw CBSA-level building permits data used as a local
-housing supply / construction activity control variable in Chapter 2.
+housing supply / construction activity control variable in Chapter 2. 
 
 ## Source
 
 Building permits data are obtained from the **U.S. Census Bureau’s Building Permits Survey (BPS)**.
 The BPS provides monthly permit counts for geographic areas including CBSAs (MSAs).
+
+Official source:
+https://www.census.gov/construction/bps/index.html
 
 ## Coverage and formats
 
