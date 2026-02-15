@@ -1,36 +1,97 @@
-# Chapter 2 Raw Data: Saiz (2010) Housing Supply Elasticity
+Price Heterogeneity related Data
 
-This folder contains raw source files used to build a CBSA-level measure of housing supply elasticity from Saiz (2010). The Saiz elasticity is originally reported at a legacy MSA (msanecma) level, so we require a Census crosswalk to map those MSAs into modern 5-digit CBSA codes.
+This folder contains raw external datasets used for heterogeneity analysis
+in the Chapter 2 housing price module.
 
-## Contents
+These data are NOT modified and should remain identical to the original
+downloaded files from official sources.
 
-1) saiz2010.csv  
-- Source: MIT Urban Economics (Saiz 2010 data)  
-  https://urbaneconomics.mit.edu/research/data  
-- Key fields used:
-  - msanecma: legacy MSA code (4-digit, often called NECMA/MSA code)
-  - elasticity: Saiz housing supply elasticity
+---
+1) BLS QCEW – County-Level Employment
 
-2) cbsa03_msa99.xls  
-- Source: U.S. Census crosswalk file (1999 MSA -> 2003 CBSA)  
-  https://www2.census.gov/programs-surveys/metro-micro/geographies/reference-files/2003/99-msa-to-03-cbsa/cbsa03_msa99.xls  
-- Purpose:
-  - Provides a mapping from legacy MSA codes (1999 definitions) to CBSA codes (2003 definitions).
-  - The file is county-based, so one MSA may map into multiple CBSAs.
+Source:
+U.S. Bureau of Labor Statistics (BLS)
+Quarterly Census of Employment and Wages (QCEW)
 
-## How these raw files are used
+Official website:
+https://www.bls.gov/cew/downloadable-data-files.htm
 
-These inputs are transformed by:
-- code/ch02/07_housing_price/00_build_saiz2010_cbsa.R
+Data used:
+Quarterly "singlefile" CSV files at the county level,
+covering 2018–2024.
 
-The script produces:
-- data/transformed/ch02/housing_price/saiz2010_cbsa.csv
+File naming format (example):
+    2018.q4.singlefile.csv
+    2019.q4.singlefile.csv
+    ...
+    2024.q4.singlefile.csv
 
-## Notes
+Content:
+County × Quarter employment data including:
+- own_code
+- industry_code
+- monthly employment levels (month1_emplvl, month2_emplvl, month3_emplvl)
 
-- If a legacy MSA maps to multiple CBSAs, we assign a “primary CBSA” defined as the CBSA containing the largest number of counties in that MSA (ties broken by CBSA code).
-- The CBSA-level elasticity file is used for heterogeneity analysis in the house price Local Projection section (grouping by supply elasticity).
+In our processing:
+- own_code = 0  (all ownership)
+- industry_code = 10 (total, all industries)
 
-  ---
+These data are later aggregated from County → CBSA level
+using Census crosswalk files.
 
-  
+--- 
+2) Census County-to-CBSA Crosswalk (List 1)
+
+Source:
+U.S. Census Bureau
+Metropolitan and Micropolitan Statistical Areas – Delineation Files
+
+Official website:
+https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/delineation-files.html
+
+File used:
+    list1_2023.xlsx
+
+Purpose:
+Provides mapping from:
+    County FIPS → CBSA code
+
+Used to aggregate county-level QCEW employment data
+into CBSA-level monthly employment totals.
+
+--- 
+3) Saiz (2010) Housing Supply Elasticity
+
+Source:
+Saiz, Albert (2010)
+"The Geographic Determinants of Housing Supply"
+
+Official data page:
+https://urbaneconomics.mit.edu/research/data
+
+File used:
+    saiz2010.csv
+
+Original geographic identifier:
+    msanecma (1999 MSA code)
+
+--- 
+4) MSA-to-CBSA Crosswalk (1999 → 2003)
+
+Source:
+U.S. Census Bureau
+
+File used:
+    cbsa03_msa99.xls
+
+Purpose:
+Maps old 1999 MSA codes to 2003 CBSA codes,
+allowing Saiz (2010) elasticity measures
+to be merged with modern CBSA-level datasets.
+
+---
+
+These raw datasets are processed into CBSA-level heterogeneity variables
+using scripts located in:
+
+    thesis/code/ch02/07_housing_price/
